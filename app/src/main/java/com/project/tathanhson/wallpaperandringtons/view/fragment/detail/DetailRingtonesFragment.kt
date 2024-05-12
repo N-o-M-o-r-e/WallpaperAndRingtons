@@ -13,6 +13,10 @@ class DetailRingtonesFragment : Fragment() {
     private lateinit var context: Context
     private lateinit var binding: FragmentDetailRingtonesBinding
 
+    companion object {
+        val TAG = DetailRingtonesFragment::class.java.name
+    }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         this.context = context

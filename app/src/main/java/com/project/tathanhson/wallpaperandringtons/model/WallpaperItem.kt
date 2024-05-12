@@ -1,6 +1,8 @@
 package com.example.wallpagerandringtons.model
 
-data class WallpaperItem (
+import java.io.Serializable
+
+data class WallpaperItem(
     val category_id: Int,
     val date_upload: String,
     val download: Int,
@@ -11,4 +13,4 @@ data class WallpaperItem (
     val live: Int,
     val name: String,
     val premium: Int
-)
+) : Serializable

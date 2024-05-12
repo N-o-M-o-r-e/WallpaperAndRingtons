@@ -3,16 +3,18 @@ package com.example.wallpagerandringtons.viewmodel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.wallpagerandringtons.model.WallpaperItem
 import com.example.wallpagerandringtons.model.WallpaperList
 import com.example.wallpagerandringtons.model.repository.Api
 import com.example.wallpagerandringtons.model.repository.RetrofitHelper
-import com.example.wallpagerandringtons.viewmodel.utils.CommonObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class WallpaperMV : ViewModel() {
     var ldListWallpaper = MutableLiveData<WallpaperList?>()
+    var ldItemWallpaper = MutableLiveData<WallpaperItem?>()
+
 
     fun getAPI() {
         val listWallpaper = RetrofitHelper.getInstance().create(Api::class.java)
@@ -21,7 +23,6 @@ class WallpaperMV : ViewModel() {
                 val listWallpaper = response.body()
                 listWallpaper?.let {
                     ldListWallpaper.value = listWallpaper
-                    Log.d("AAAAAAAA", "onResponse: $listWallpaper")
                 }
             }
 
@@ -30,6 +31,7 @@ class WallpaperMV : ViewModel() {
             }
         })
     }
+
 
 }
 

@@ -12,6 +12,10 @@ class DetailLiveWallpaperFragment : Fragment() {
     private lateinit var context: Context
     private lateinit var binding: FragmentDetailWallpaperBinding
 
+    companion object {
+        val TAG = DetailLiveWallpaperFragment::class.java.name
+    }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         this.context = context

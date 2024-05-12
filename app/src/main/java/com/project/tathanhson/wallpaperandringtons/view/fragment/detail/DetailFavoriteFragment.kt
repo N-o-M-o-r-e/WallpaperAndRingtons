@@ -13,6 +13,10 @@ class DetailFavoriteFragment : Fragment() {
     private lateinit var context: Context
     private lateinit var binding: FragmentDetailFavoriteBinding
 
+    companion object {
+        val TAG = DetailFavoriteFragment::class.java.name
+    }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         this.context = context

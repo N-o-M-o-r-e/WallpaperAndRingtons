@@ -7,6 +7,6 @@ import retrofit2.http.GET
 
 interface Api {
 
-    @GET("wallpapers/?skip=0&limit=5")
+    @GET("wallpapers/?skip=0&limit=15")
     fun getWallpaperList(): Call<WallpaperList>
 }

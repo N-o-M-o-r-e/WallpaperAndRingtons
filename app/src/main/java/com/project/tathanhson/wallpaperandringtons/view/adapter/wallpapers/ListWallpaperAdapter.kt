@@ -12,16 +12,18 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.wallpagerandringtons.model.WallpaperItem
 import com.example.wallpagerandringtons.model.WallpaperList
 import com.example.wallpagerandringtons.viewmodel.WallpaperMV
+import com.example.wallpagerandringtons.viewmodel.utils.CommonObject
 import com.project.tathanhson.wallpaperandringtons.R
 import com.project.tathanhson.wallpaperandringtons.databinding.ItemWallpaperBinding
 
-class DesWallpaperAdapter(
+class ListWallpaperAdapter(
     private val context: Context,
     private val viewModel: WallpaperMV,
     private val lifecycleOwner: LifecycleOwner,
     private val wallpaperList: WallpaperList
 
-) : RecyclerView.Adapter<DesWallpaperAdapter.ItemHolder>() {
+) : RecyclerView.Adapter<ListWallpaperAdapter.ItemHolder>() {
+
 
     private var itemSelect: WallpaperItem? = null
 
@@ -29,11 +31,14 @@ class DesWallpaperAdapter(
         RecyclerView.ViewHolder(binding.root) {
         init {
             itemView.setOnClickListener {
-                itemSelect = itemView.tag as WallpaperItem
-                itemSelect.let {
+                val position = itemView.tag as Int
 
+                itemSelect = wallpaperList[position]
+                CommonObject.positionItem.value = position
+
+                itemSelect?.let {
+                    viewModel.ldItemWallpaper.value = itemSelect
                 }
-
             }
         }
     }
@@ -49,10 +54,12 @@ class DesWallpaperAdapter(
     }
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
-        // gán dữ liệu detail item
-        val itemWallpaper = wallpaperList.get(position)
+        val itemWallpaper = wallpaperList[position]
         val imgPath = itemWallpaper.img_large
         loadPathImageToView(imgPath, holder.binding.imgWallpaper)
+        holder.itemView.tag = position
+
+
     }
 
     private fun loadPathImageToView(pathImage: String, imgWallpaper: ImageView) {
@@ -60,10 +67,10 @@ class DesWallpaperAdapter(
             .load(pathImage)
             .apply(
                 RequestOptions()
-                    .placeholder(R.drawable.img_placeholder) // Ảnh placeholder nếu URL không hợp lệ hoặc không thể tải được
-                    .error(R.drawable.img_placeholder) // Ảnh hiển thị khi có lỗi xảy ra trong quá trình tải ảnh
+                    .placeholder(R.drawable.img_placeholder)
+                    .error(R.drawable.img_placeholder)
                     .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-            ) // Cấu hình cho việc sử dụng cache
+            )
             .into(imgWallpaper)
     }
 }
