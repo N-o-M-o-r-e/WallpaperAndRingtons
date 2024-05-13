@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".view.fragment.detail.DetailWallpaperFragment">
 
+    <include android:id="@+id/progressBar"
+        layout="@layout/include_progress_bar"
+        android:visibility="invisible"
+        />
+
+
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/statusBar"
         android:layout_width="match_parent"

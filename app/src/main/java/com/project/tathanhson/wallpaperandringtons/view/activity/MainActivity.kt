@@ -13,16 +13,11 @@ import com.example.wallpagerandringtons.viewmodel.utils.CommonObject
 import com.project.tathanhson.wallpaperandringtons.R
 import com.project.tathanhson.wallpaperandringtons.databinding.ActivityMainBinding
 
-class HomeActivity : BaseActivity<ActivityMainBinding>() {
+class MainActivity : BaseActivity<ActivityMainBinding>(){
 
     private lateinit var viewModel: WallpaperMV
-
     companion object {
-        val TAG = HomeActivity::class.java.name
-    }
-
-    override fun initViewBinding(): ActivityMainBinding {
-        return ActivityMainBinding.inflate(layoutInflater)
+        val TAG = MainActivity::class.java.name
     }
 
     override fun initViewModel() {
@@ -57,18 +52,18 @@ class HomeActivity : BaseActivity<ActivityMainBinding>() {
         initData()
     }
 
-
     private fun initData() {
         viewModel.ldItemWallpaper.observe(this, Observer { item ->
             goToDetailActivity(item)
         })
     }
-
+    override fun initViewBinding(): ActivityMainBinding {
+        return ActivityMainBinding.inflate(layoutInflater)
+    }
 
     fun goToDetailActivity(item: WallpaperItem?) {
         intent = Intent(this, DetailActivity::class.java)
         CommonObject.iamgeWallperLD.value = item
         startActivity(intent)
     }
-
 }

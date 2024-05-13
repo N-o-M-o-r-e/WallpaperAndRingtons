@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center|top"
+    android:background="@drawable/background_bottom_bar"
+    android:paddingVertical="16dp">
+
+    <View
+        android:layout_width="24dp"
+        android:layout_height="2dp"
+        android:background="#D9D9D9"
+        android:layout_marginBottom="16dp"
+        />
+    
+    <TextView
+        android:id="@+id/btnSetHomeScr"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text="Set to home screen"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        />
+
+    <TextView
+        android:id="@+id/btnSetLockScr"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text="Set to lock screen"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+
+    <TextView
+        android:id="@+id/btnSetHomeAndLock"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text="Set to home &amp; lock screen"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        />
+
+    <TextView
+        android:id="@+id/btnSetContacts"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text="Contacts photo"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        />
+
+    <TextView
+        android:id="@+id/btnSetDowndload"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text="Download"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        />
+    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_gray"/>
+
+    <TextView
+        android:id="@+id/btnCancel"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text="Cancel"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"/>
+
+    
+
+
+</LinearLayout>
