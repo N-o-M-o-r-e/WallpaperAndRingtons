@@ -10,12 +10,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.wallpagerandringtons.model.WallpaperList
+import com.project.tathanhson.wallpaperandringtons.model.wallpaper.WallpaperList
 import com.example.wallpagerandringtons.view.adapter.wallpapers.ListWallpaperAdapter
 import com.example.wallpagerandringtons.view.adapter.wallpapers.TitleWallpaperAdapter
 import com.example.wallpagerandringtons.viewmodel.WallpaperMV
 import com.project.tathanhson.wallpaperandringtons.databinding.FragmentWallpaperBinding
-import com.project.tathanhson.wallpaperandringtons.model.TitleWallpapers
+import com.project.tathanhson.wallpaperandringtons.model.wallpaper.TitleWallpapers
 
 
 class WallpaperFragment : Fragment() {

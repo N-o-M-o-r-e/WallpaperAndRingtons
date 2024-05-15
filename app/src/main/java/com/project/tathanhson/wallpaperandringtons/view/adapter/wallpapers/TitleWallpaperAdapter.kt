@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
-import com.example.wallpagerandringtons.model.WallpaperItem
+import com.project.tathanhson.wallpaperandringtons.model.wallpaper.WallpaperItem
 import com.example.wallpagerandringtons.viewmodel.WallpaperMV
 import com.project.tathanhson.wallpaperandringtons.databinding.ItemTitleBinding
-import com.project.tathanhson.wallpaperandringtons.model.TitleWallpapers
+import com.project.tathanhson.wallpaperandringtons.model.wallpaper.TitleWallpapers
 
 class TitleWallpaperAdapter(
     private val context: Context,

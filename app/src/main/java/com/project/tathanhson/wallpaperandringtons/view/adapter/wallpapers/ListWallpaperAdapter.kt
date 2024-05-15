@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
-import com.example.wallpagerandringtons.model.WallpaperItem
-import com.example.wallpagerandringtons.model.WallpaperList
+import com.project.tathanhson.wallpaperandringtons.model.wallpaper.WallpaperItem
+import com.project.tathanhson.wallpaperandringtons.model.wallpaper.WallpaperList
 import com.example.wallpagerandringtons.viewmodel.WallpaperMV
 import com.example.wallpagerandringtons.viewmodel.utils.CommonObject
 import com.project.tathanhson.wallpaperandringtons.R

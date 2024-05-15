@@ -1,4 +1,4 @@
-package com.example.wallpagerandringtons.model
+package com.project.tathanhson.wallpaperandringtons.model.wallpaper
 
 import java.io.Serializable
 

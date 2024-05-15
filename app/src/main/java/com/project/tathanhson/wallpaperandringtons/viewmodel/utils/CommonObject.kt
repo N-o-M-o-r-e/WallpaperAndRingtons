@@ -6,8 +6,8 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
-import com.example.wallpagerandringtons.model.WallpaperItem
-import com.example.wallpagerandringtons.model.WallpaperList
+import com.project.tathanhson.wallpaperandringtons.model.wallpaper.WallpaperItem
+import com.project.tathanhson.wallpaperandringtons.model.wallpaper.WallpaperList
 import com.project.tathanhson.wallpaperandringtons.MyApplication
 import com.project.tathanhson.wallpaperandringtons.view.fragment.detail.DetailWallpaperFragment
 

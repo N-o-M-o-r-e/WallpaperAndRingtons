@@ -3,10 +3,10 @@ package com.project.tathanhson.wallpaperandringtons.view.activity
 import android.content.Intent
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.wallpagerandringtons.model.WallpaperItem
+import com.project.tathanhson.wallpaperandringtons.model.wallpaper.WallpaperItem
 import com.example.wallpagerandringtons.view.fragment.detail.DetailFavoriteFragment
 import com.example.wallpagerandringtons.view.fragment.detail.DetailLiveWallpaperFragment
-import com.example.wallpagerandringtons.view.fragment.detail.DetailRingtonesFragment
+import com.example.wallpagerandringtons.view.fragment.list.RingtonesFragment
 import com.example.wallpagerandringtons.view.fragment.list.WallpaperFragment
 import com.example.wallpagerandringtons.viewmodel.WallpaperMV
 import com.example.wallpagerandringtons.viewmodel.utils.CommonObject
@@ -16,6 +16,7 @@ import com.project.tathanhson.wallpaperandringtons.databinding.ActivityMainBindi
 class MainActivity : BaseActivity<ActivityMainBinding>(){
 
     private lateinit var viewModel: WallpaperMV
+    private val frgWallpaper = WallpaperFragment()
     companion object {
         val TAG = MainActivity::class.java.name
     }
@@ -25,21 +26,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>(){
     }
 
     override fun initView() {
-        val fragment = WallpaperFragment()
-        fragment.viewModel = viewModel
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.frameLayout, fragment)
-            .commit()
+        frgWallpaper.viewModel = viewModel
+        supportFragmentManager.beginTransaction().replace(R.id.frameLayout, frgWallpaper).commit()
+
 
         binding.btnWallpaper.setOnClickListener {
-            fragment.viewModel = viewModel
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.frameLayout, fragment)
-                .commit()
+            frgWallpaper.viewModel = viewModel
+            supportFragmentManager.beginTransaction().replace(R.id.frameLayout, frgWallpaper).commit()
         }
 
         binding.btnRingtones.setOnClickListener {
-            showFragmemnt(DetailRingtonesFragment())
+            showFragmemnt(RingtonesFragment())
         }
 
         binding.btnLiveWallpaper.setOnClickListener {
