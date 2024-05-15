@@ -1,6 +1,7 @@
 package com.project.tathanhson.wallpaperandringtons.model.wallpaper
 
-data class TitleWallpapers(
+data class Title(
     val id: Int,
-    val title: String
+    val name: String,
+    val image_url : String
 )

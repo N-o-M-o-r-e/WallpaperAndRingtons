@@ -57,7 +57,9 @@ class ListWallpaperAdapter(
         val itemWallpaper = wallpaperList[position]
         val imgPath = itemWallpaper.img_large
         loadPathImageToView(imgPath, holder.binding.imgWallpaper)
+        holder.binding.tvFavorite.text = itemWallpaper.favorite.toString()
         holder.itemView.tag = position
+
 
 
     }

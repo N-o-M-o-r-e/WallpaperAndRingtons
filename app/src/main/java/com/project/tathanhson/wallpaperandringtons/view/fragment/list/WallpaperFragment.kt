@@ -9,13 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.tathanhson.wallpaperandringtons.model.wallpaper.WallpaperList
 import com.example.wallpagerandringtons.view.adapter.wallpapers.ListWallpaperAdapter
 import com.example.wallpagerandringtons.view.adapter.wallpapers.TitleWallpaperAdapter
 import com.example.wallpagerandringtons.viewmodel.WallpaperMV
 import com.project.tathanhson.wallpaperandringtons.databinding.FragmentWallpaperBinding
-import com.project.tathanhson.wallpaperandringtons.model.wallpaper.TitleWallpapers
+import com.project.tathanhson.wallpaperandringtons.model.wallpaper.Title
 
 
 class WallpaperFragment : Fragment() {
@@ -28,7 +27,7 @@ class WallpaperFragment : Fragment() {
     private var listWallpaper: WallpaperList? = null
 
 
-    var listTitle: ArrayList<TitleWallpapers> = ArrayList()
+    var listTitle: ArrayList<Title> = ArrayList()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -53,34 +52,28 @@ class WallpaperFragment : Fragment() {
     }
 
     private fun crateData() {
-        val titles = arrayOf(
-            "Popular",
-            "New",
-            "Abstract",
-            "Animal",
-            "Colorful",
-            "Anime",
-            "Minimal",
-            "Nature",
-            "Space",
-            "Texture",
-            "Plant"
-        )
 
-        for (i in titles.indices) {
-            listTitle.add(TitleWallpapers(i + 1, titles[i]))
-        }
+        viewModel.ldListTitle.observe(viewLifecycleOwner, Observer{ listTitle ->
+            listTitle?.let {
+                adapterTitle = TitleWallpaperAdapter(context, viewModel, viewLifecycleOwner, listTitle)
+                binding.rcvTitle.adapter = adapterTitle
+            }
 
-        adapterTitle = TitleWallpaperAdapter(context, viewModel, viewLifecycleOwner, listTitle)
-        val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        binding.rcvTitle.layoutManager = layoutManager
+        })
 
 
-        binding.rcvTitle.adapter = adapterTitle
+
     }
 
     private fun initViewModel() {
-        viewModel.getAPI()
+        viewModel.getApiWallpaperTitle()
+
+        viewModel.ldItemTitle.observe(viewLifecycleOwner, Observer{ titleSelected ->
+            titleSelected?.id.let {
+                viewModel.getApiWallpaperDetail(titleSelected!!.id)
+            }
+        })
+
     }
 
 

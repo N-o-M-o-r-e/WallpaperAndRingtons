@@ -37,7 +37,7 @@
             android:layout_height="match_parent"
             android:text="Swipe up"
             android:gravity="center"
-            android:textColor="@color/color_gray"
+            android:textColor="@color/gray"
             android:drawableTop="@drawable/ic_swip_up"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

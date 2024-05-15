@@ -1,5 +1,6 @@
 package com.example.wallpagerandringtons.model.repository
 
+import com.project.tathanhson.wallpaperandringtons.model.wallpaper.ListTitle
 import com.project.tathanhson.wallpaperandringtons.model.wallpaper.WallpaperList
 import retrofit2.Call
 import retrofit2.http.GET
@@ -17,4 +18,7 @@ interface Api {
         @Path("categoryId") categoryId: Int,
         @Query("limit") limit: Int
     ): Call<WallpaperList>
+
+    @GET("category/")
+    fun getWallpaperTitle(): Call<ListTitle>
 }
