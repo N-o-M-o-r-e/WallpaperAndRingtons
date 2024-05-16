@@ -5,7 +5,9 @@ import android.media.MediaPlayer
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
+import com.example.wallpagerandringtons.viewmodel.utils.CommonObject
 import com.project.tathanhson.wallpaperandringtons.R
 import com.project.tathanhson.wallpaperandringtons.databinding.ItemRingtoneBinding
 import com.project.tathanhson.wallpaperandringtons.model.ringtones.Ringtone
@@ -16,14 +18,31 @@ class ListRingtonesAdapter(
     private val context: Context,
     private val viewModel: RingtonesVM,
     private val lifecycleOwner: LifecycleOwner,
-    private val ringtonesList: ArrayList<Ringtone>
+    private val ringtonesList: ArrayList<Ringtone>,
+    private var title: String
 ) : RecyclerView.Adapter<ListRingtonesAdapter.ItemHolder>() {
 
     private var mediaPlayer: MediaPlayer? = null
     private var selectedPosition: Int = -1
 
+
+    private val backgroundResources = arrayOf(
+        R.drawable.background_ringtone_lavender,
+        R.drawable.background_ringtone_blue,
+        R.drawable.background_ringtone_blue_light,
+        R.drawable.background_ringtone_oranger,
+        R.drawable.background_ringtone_pink
+    )
+
     inner class ItemHolder(val binding: ItemRingtoneBinding) :
         RecyclerView.ViewHolder(binding.root) {
+            init {
+                itemView.setOnClickListener {
+                    val position = adapterPosition
+                    val itemSelected = ringtonesList[position]
+                    CommonObject.positionItemRingtonw.value = position
+                }
+            }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
@@ -31,17 +50,27 @@ class ListRingtonesAdapter(
         return ItemHolder(binding)
     }
 
-    override fun getItemCount(): Int {
+    override fun getItemCount() : Int {
         return ringtonesList.size
     }
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
         val itemRingtone = ringtonesList[position]
+
+        val randomBackground = backgroundResources.random()
+        holder.binding.viewRingtone.setBackgroundResource(randomBackground)
+
         holder.binding.tvName.text = itemRingtone.fileName
 
         holder.binding.btnPlayOrPause.setOnClickListener {
             handleItemClick(position)
         }
+
+        CommonObject.itemTitleRingtone.observe(lifecycleOwner, Observer { titleChange ->
+            if (!titleChange.equals(title)) {
+                stopRingtone()
+            }
+        })
 
         // Cập nhật trạng thái của nút phát/pause
         val iconResId = if (selectedPosition == position) {

@@ -1,26 +1,19 @@
 package com.project.tathanhson.wallpaperandringtons.view.fragment.ringtones
 
 import android.content.Context
-import android.media.MediaPlayer
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.wallpagerandringtons.view.adapter.wallpapers.TitleWallpaperAdapter
-import com.example.wallpagerandringtons.viewmodel.WallpaperVM
 import com.example.wallpagerandringtons.viewmodel.utils.CommonObject
 import com.project.tathanhson.wallpaperandringtons.databinding.FragmentRingtonesBinding
-import com.project.tathanhson.wallpaperandringtons.model.ringtones.Ringtone
 import com.project.tathanhson.wallpaperandringtons.view.adapter.ringtones.ListRingtonesAdapter
 import com.project.tathanhson.wallpaperandringtons.view.adapter.ringtones.TitleRingtonesAdapter
 import com.project.tathanhson.wallpaperandringtons.viewmodel.RingtonesVM
-import java.io.IOException
 
 
 class RingtonesFragment : Fragment() {
@@ -29,6 +22,7 @@ class RingtonesFragment : Fragment() {
     lateinit var viewModel: RingtonesVM
     private lateinit var adapterTitle : TitleRingtonesAdapter
     private lateinit var adapterListRingtones: ListRingtonesAdapter
+    private var title =""
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -63,9 +57,11 @@ class RingtonesFragment : Fragment() {
             }
         })
 
-        CommonObject.itemTitleRingtone.observe(viewLifecycleOwner , Observer{ titleSelect->
+        CommonObject.itemTitleRingtone.observe(viewLifecycleOwner , Observer { titleSelect->
             run {
                 titleSelect?.let {
+                    title = it
+                    //creat list ringtone with titleSelected
                     viewModel.getRingtonesFromFolder(context, titleSelect)
                 }
             }
@@ -73,7 +69,7 @@ class RingtonesFragment : Fragment() {
 
         viewModel.ldItemFolder.observe(viewLifecycleOwner, Observer{ listRingtones ->
             binding.rcvRingtones.layoutManager = LinearLayoutManager(context)
-            adapterListRingtones = ListRingtonesAdapter(context, viewModel, viewLifecycleOwner, listRingtones)
+            adapterListRingtones = ListRingtonesAdapter(context, viewModel, viewLifecycleOwner, listRingtones, title)
             binding.rcvRingtones.adapter = adapterListRingtones
         })
 

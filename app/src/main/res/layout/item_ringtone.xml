@@ -7,15 +7,22 @@
     android:gravity="center|start"
     >
 
-    <ImageView
-        android:id="@+id/btnPlayOrPause"
+    <LinearLayout
+        android:id="@+id/viewRingtone"
         android:layout_width="96dp"
         android:layout_height="96dp"
-        android:src="@drawable/ic_play"
-        android:padding="24dp"
-        android:backgroundTint="@color/blue_light"
-        android:background="@drawable/background_ringtone"
-        />
+        android:background="@drawable/background_ringtone_blue">
+
+        <ImageView
+            android:id="@+id/btnPlayOrPause"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/ic_play"
+            android:padding="24dp"
+            />
+
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,6 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Admina Thembi"
+            android:visibility="gone"
             style="@style/title_regular_12"
             android:layout_marginVertical="4dp"
             android:gravity="start|center"/>
@@ -49,11 +57,10 @@
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_downloads_rt"
             android:text="114k"
+            android:visibility="gone"
             android:layout_marginVertical="4dp"
             style="@style/title_regular_12"
             android:drawablePadding="4dp"/>
     </LinearLayout>
-
-
 
 </LinearLayout>

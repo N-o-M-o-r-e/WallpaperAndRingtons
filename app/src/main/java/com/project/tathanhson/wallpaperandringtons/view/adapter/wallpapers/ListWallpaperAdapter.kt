@@ -34,7 +34,7 @@ class ListWallpaperAdapter(
                 val position = itemView.tag as Int
 
                 itemSelect = wallpaperList[position]
-                CommonObject.positionItem.value = position
+                CommonObject.positionItemWallpaper.value = position
 
                 itemSelect?.let {
                     viewModel.ldItemWallpaper.value = itemSelect

@@ -7,21 +7,15 @@ import androidx.lifecycle.MutableLiveData
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.project.tathanhson.wallpaperandringtons.model.wallpaper.WallpaperItem
-import com.project.tathanhson.wallpaperandringtons.model.wallpaper.WallpaperList
 import com.project.tathanhson.wallpaperandringtons.MyApplication
-import com.project.tathanhson.wallpaperandringtons.model.ringtones.Ringtone
 import com.project.tathanhson.wallpaperandringtons.view.fragment.wallpaper.DetailWallpaperFragment
 
 object CommonObject {
-    var WallpaperList: WallpaperList? = null
-    var WallpaperItem: WallpaperItem? = null
-
     var iamgeWallperLD = MutableLiveData<WallpaperItem>()
-    var listWallperLD = MutableLiveData<WallpaperList>()
+    var positionItemWallpaper = MutableLiveData<Int>()
 
-    var positionItem = MutableLiveData<Int>()
     var itemTitleRingtone = MutableLiveData<String>()
-
+    var positionItemRingtonw = MutableLiveData<Int>()
 
 
     var imageFile = ""
