@@ -1,41 +1,48 @@
 package com.project.tathanhson.wallpaperandringtons.view.activity
 
 import android.content.Intent
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.project.tathanhson.wallpaperandringtons.model.wallpaper.WallpaperItem
-import com.example.wallpagerandringtons.view.fragment.detail.DetailFavoriteFragment
-import com.example.wallpagerandringtons.view.fragment.detail.DetailLiveWallpaperFragment
-import com.example.wallpagerandringtons.view.fragment.list.RingtonesFragment
-import com.example.wallpagerandringtons.view.fragment.list.WallpaperFragment
-import com.example.wallpagerandringtons.viewmodel.WallpaperMV
+import com.project.tathanhson.wallpaperandringtons.view.fragment.favorite.DetailFavoriteFragment
+import com.project.tathanhson.wallpaperandringtons.view.fragment.livewallpaper.DetailLiveWallpaperFragment
+import com.project.tathanhson.wallpaperandringtons.view.fragment.ringtones.RingtonesFragment
+import com.project.tathanhson.wallpaperandringtons.view.fragment.wallpaper.WallpaperFragment
+import com.example.wallpagerandringtons.viewmodel.WallpaperVM
 import com.example.wallpagerandringtons.viewmodel.utils.CommonObject
 import com.project.tathanhson.wallpaperandringtons.R
 import com.project.tathanhson.wallpaperandringtons.databinding.ActivityMainBinding
+import com.project.tathanhson.wallpaperandringtons.viewmodel.RingtonesVM
 
 class MainActivity : BaseActivity<ActivityMainBinding>(){
 
-    private lateinit var viewModel: WallpaperMV
+
+    private lateinit var wallpaperVM: WallpaperVM
+    private lateinit var ringtonesVM: RingtonesVM
     private val frgWallpaper = WallpaperFragment()
+    private val frgRingtone = RingtonesFragment()
     companion object {
         val TAG = MainActivity::class.java.name
     }
 
     override fun initViewModel() {
-        viewModel = ViewModelProvider(this)[WallpaperMV::class.java]
+        wallpaperVM = ViewModelProvider(this)[WallpaperVM::class.java]
+        ringtonesVM = ViewModelProvider(this)[RingtonesVM::class.java]
     }
 
     override fun initView() {
-        frgWallpaper.viewModel = viewModel
+        frgWallpaper.viewModel = wallpaperVM
         supportFragmentManager.beginTransaction().replace(R.id.frameLayout, frgWallpaper).commit()
 
 
         binding.btnWallpaper.setOnClickListener {
-            frgWallpaper.viewModel = viewModel
+            frgWallpaper.viewModel = wallpaperVM
             supportFragmentManager.beginTransaction().replace(R.id.frameLayout, frgWallpaper).commit()
         }
 
         binding.btnRingtones.setOnClickListener {
+            frgRingtone.viewModel = ringtonesVM
             showFragmemnt(RingtonesFragment())
         }
 
@@ -47,10 +54,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(){
             showFragmemnt(DetailFavoriteFragment())
         }
         initData()
+        checkInternet()
     }
 
     private fun initData() {
-        viewModel.ldItemWallpaper.observe(this, Observer { item ->
+        wallpaperVM.ldItemWallpaper.observe(this, Observer { item ->
             goToDetailActivity(item)
         })
     }
@@ -62,5 +70,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(){
         intent = Intent(this, DetailActivity::class.java)
         CommonObject.iamgeWallperLD.value = item
         startActivity(intent)
+    }
+
+
+    private fun checkInternet(){
+
     }
 }

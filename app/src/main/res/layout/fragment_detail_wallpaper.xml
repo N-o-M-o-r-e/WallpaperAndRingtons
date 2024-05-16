@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragment.detail.DetailWallpaperFragment">
+    tools:context=".view.fragment.wallpaper.DetailWallpaperFragment">
 
     <include android:id="@+id/progressBar"
         layout="@layout/include_progress_bar"
@@ -94,7 +94,6 @@
             android:id="@+id/btnFavorite"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-
             android:drawablePadding="8dp"
             android:gravity="center"
             android:text="213"

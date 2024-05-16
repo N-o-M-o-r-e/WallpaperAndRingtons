@@ -8,14 +8,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
-import com.example.wallpagerandringtons.viewmodel.WallpaperMV
+import com.example.wallpagerandringtons.viewmodel.WallpaperVM
 import com.project.tathanhson.wallpaperandringtons.R
 import com.project.tathanhson.wallpaperandringtons.databinding.ItemTitleBinding
 import com.project.tathanhson.wallpaperandringtons.model.wallpaper.Title
 
 class TitleWallpaperAdapter(
     private val context: Context,
-    private val viewModel: WallpaperMV,
+    private val viewModel: WallpaperVM,
     private val lifecycleOwner: LifecycleOwner,
     private val listTitle: ArrayList<Title>
 ) : RecyclerView.Adapter<TitleWallpaperAdapter.ItemHolder>() {

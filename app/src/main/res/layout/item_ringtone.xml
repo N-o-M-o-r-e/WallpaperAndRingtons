@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="96dp"
+    android:layout_margin="8dp"
+    android:orientation="horizontal"
+    android:gravity="center|start"
+    >
+
+    <ImageView
+        android:id="@+id/btnPlayOrPause"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:src="@drawable/ic_play"
+        android:padding="24dp"
+        android:backgroundTint="@color/blue_light"
+        android:background="@drawable/background_ringtone"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1"
+        android:layout_marginStart="8dp"
+        android:gravity="center|start"
+
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start|center"
+            style="@style/title_bold_16"
+            android:layout_marginVertical="4dp"
+            android:text="Take care of you"/>
+
+        <TextView
+            android:id="@+id/tvDes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Admina Thembi"
+            style="@style/title_regular_12"
+            android:layout_marginVertical="4dp"
+            android:gravity="start|center"/>
+
+        <TextView
+            android:id="@+id/tvCoutDownload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_downloads_rt"
+            android:text="114k"
+            android:layout_marginVertical="4dp"
+            style="@style/title_regular_12"
+            android:drawablePadding="4dp"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>

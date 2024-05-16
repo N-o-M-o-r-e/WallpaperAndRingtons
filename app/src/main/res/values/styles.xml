@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--    font-->
+    <style name="Nunito_Bold">
+        <item name="fontFamily">@font/nunito_bold</item>
+    </style>
+
+    <style name="Nunito_Regular">
+        <item name="fontFamily">@font/nunito_regular</item>
+    </style>
+
+    <style name="Nunito_SemiBold">
+        <item name="fontFamily">@font/nunito_semibold</item>
+    </style>
+
+    <style name="Nunito_Medium">
+        <item name="fontFamily">@font/nunito_light</item>
+    </style>
+
+<!--    text style-->
+    <style name="title_bold_16" parent="Nunito_Bold">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="title_bold_14" parent="Nunito_Bold">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="title_regular_12" parent="Nunito_Bold">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="title_light_16" parent="Nunito_Bold">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+</resources>

@@ -9,7 +9,8 @@ import com.bumptech.glide.request.target.SimpleTarget
 import com.project.tathanhson.wallpaperandringtons.model.wallpaper.WallpaperItem
 import com.project.tathanhson.wallpaperandringtons.model.wallpaper.WallpaperList
 import com.project.tathanhson.wallpaperandringtons.MyApplication
-import com.project.tathanhson.wallpaperandringtons.view.fragment.detail.DetailWallpaperFragment
+import com.project.tathanhson.wallpaperandringtons.model.ringtones.Ringtone
+import com.project.tathanhson.wallpaperandringtons.view.fragment.wallpaper.DetailWallpaperFragment
 
 object CommonObject {
     var WallpaperList: WallpaperList? = null
@@ -19,6 +20,9 @@ object CommonObject {
     var listWallperLD = MutableLiveData<WallpaperList>()
 
     var positionItem = MutableLiveData<Int>()
+    var itemTitleRingtone = MutableLiveData<String>()
+
+
 
     var imageFile = ""
 

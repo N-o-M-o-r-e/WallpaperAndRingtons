@@ -11,14 +11,14 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.project.tathanhson.wallpaperandringtons.model.wallpaper.WallpaperItem
 import com.project.tathanhson.wallpaperandringtons.model.wallpaper.WallpaperList
-import com.example.wallpagerandringtons.viewmodel.WallpaperMV
+import com.example.wallpagerandringtons.viewmodel.WallpaperVM
 import com.example.wallpagerandringtons.viewmodel.utils.CommonObject
 import com.project.tathanhson.wallpaperandringtons.R
 import com.project.tathanhson.wallpaperandringtons.databinding.ItemWallpaperBinding
 
 class ListWallpaperAdapter(
     private val context: Context,
-    private val viewModel: WallpaperMV,
+    private val viewModel: WallpaperVM,
     private val lifecycleOwner: LifecycleOwner,
     private val wallpaperList: WallpaperList
 

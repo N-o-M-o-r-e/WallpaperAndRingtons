@@ -2,7 +2,7 @@ package com.project.tathanhson.wallpaperandringtons.view.activity
 
 import com.project.tathanhson.wallpaperandringtons.R
 import com.project.tathanhson.wallpaperandringtons.databinding.ActivityDetailBinding
-import com.project.tathanhson.wallpaperandringtons.view.fragment.detail.DetailWallpaperFragment
+import com.project.tathanhson.wallpaperandringtons.view.fragment.wallpaper.DetailWallpaperFragment
 
 class DetailActivity : BaseActivity<ActivityDetailBinding>() {
     companion object {
