@@ -12,6 +12,7 @@ class RingtonesVM : ViewModel() {
     val ldListFolder = MutableLiveData<ArrayList<String>>()
     val ldItemFolder = MutableLiveData<ArrayList<Ringtone>>() // Sử dụng ArrayList ở đây
     var ldItemRingtone = MutableLiveData<Ringtone>()
+
     fun getFoldersFromAssets(context: Context) {
         val assetManager = context.assets
         val folders = ArrayList<String>()
@@ -26,14 +27,13 @@ class RingtonesVM : ViewModel() {
                     e.printStackTrace()
                 }
             }
-
         } catch (e: IOException) {
             e.printStackTrace()
         }
         folders.remove("webkit")
         folders.remove("images")
 
-        Log.d("AAAAAAAAAAAAAA", folders.toString())
+//        Log.d("AAAAAAAAAAAAAA", folders.toString())
         ldListFolder.value = folders
     }
 
@@ -52,7 +52,7 @@ class RingtonesVM : ViewModel() {
         } catch (e: IOException) {
             e.printStackTrace()
         }
-        Log.d("AAAAAAAAAAAAAAAAA", "getRingtonesFromFolder: "+ringtones)
+//        Log.d("AAAAAAAAAAAAAAAAA", "getRingtonesFromFolder: "+ringtones)
         ldItemFolder.value = ringtones
     }
 }

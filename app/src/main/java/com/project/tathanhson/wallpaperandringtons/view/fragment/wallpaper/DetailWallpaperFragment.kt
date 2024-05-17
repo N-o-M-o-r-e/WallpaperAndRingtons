@@ -66,7 +66,7 @@ class DetailWallpaperFragment : Fragment() {
     private fun initData() {
         CommonObject.iamgeWallperLD.observe(viewLifecycleOwner, Observer { item ->
             item?.let {
-                imagePath = it.img_thumb
+                imagePath = it.img_large
                 loadPathImageToView(imagePath, binding.imgDetail)
                 binding.btnFavorite.text = it.favorite.toString()
                 binding.btnDownload.text = it.download.toString()
@@ -92,16 +92,16 @@ class DetailWallpaperFragment : Fragment() {
         }
 
         binding.btnFavorite.setOnClickListener {
-            Log.d("AAAAAAAAAAAAAAA", "initData: "+coutClick)
+//            Log.d("AAAAAAAAAAAAAAA", "initData: "+coutClick)
             if(coutClick == 0){
                 countFavorite++
                 coutClick++
-                Log.d("AAAAAAAAAAAAAA", "initData: click update")
+//                Log.d("AAAAAAAAAAAAAA", "initData: click update")
                 CommonObject.iamgeWallperLD.observe(viewLifecycleOwner, Observer { item ->
                     item?.let {
                         viewModel.postUpdateFavorite(it.id)
                         binding.btnFavorite.text = countFavorite.toString()
-                        Log.d(TAG, "initData: "+it.favorite.toString())
+//                        Log.d("AAAAAAAAAAAAAAAAA", "initData: "+it.favorite.toString())
 
                     }
                 })

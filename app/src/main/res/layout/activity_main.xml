@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     android:orientation="vertical"
-    tools:context=".view.activity.HomeActivity">
+    tools:context=".view.activity.MainActivity">
 
     <include android:id="@+id/statusBar"
         layout="@layout/status_bar"/>

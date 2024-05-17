@@ -1,6 +1,7 @@
 package com.example.wallpagerandringtons.view.adapter.wallpapers
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -55,12 +56,11 @@ class ListWallpaperAdapter(
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
         val itemWallpaper = wallpaperList[position]
-        val imgPath = itemWallpaper.img_large
+        val imgPath = itemWallpaper.img_thumb
+        Log.d("API", "onBindViewHolder: "+itemWallpaper.img_large)
         loadPathImageToView(imgPath, holder.binding.imgWallpaper)
         holder.binding.tvFavorite.text = itemWallpaper.favorite.toString()
         holder.itemView.tag = position
-
-
 
     }
 

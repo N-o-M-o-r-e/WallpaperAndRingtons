@@ -56,7 +56,7 @@ class TitleRingtonesAdapter(
                     notifyItemChanged(selectedPosition)
                     val itemSelect = listTitle[position]
                     CommonObject.itemTitleRingtone.value = itemSelect
-                    Log.d("TitleWallpaperAdapter", "Selected title: ${itemSelect}")
+//                    Log.d("TitleWallpaperAdapter", "Selected title: ${itemSelect}")
                 }
             }
         }

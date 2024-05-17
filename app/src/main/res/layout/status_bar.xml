@@ -11,14 +11,17 @@
         android:padding="12dp"/>
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
         android:layout_weight="1"
-        android:gravity="center"
-        android:textSize="16sp"
-        android:textStyle="bold"
+        android:layout_height="wrap_content"
+        android:text="WALLPAPER &amp; RINGTONES"
+        android:textSize="18sp"
         android:textColor="@color/white"
-        android:text="WALL AND RINGTONES"/>
+        style="@style/title_bold_16"
+        android:layout_margin="16dp"
+        android:gravity="center"/>
+
 
     <ImageView
         android:layout_width="56dp"

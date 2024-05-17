@@ -60,7 +60,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(){
             goToDetailWallpaper(item)
         })
 
-        CommonObject.positionItemRingtonw.observe(this, Observer { position ->
+        CommonObject.positionItemRingtone.observe(this, Observer { position ->
             goToDetailRingtone()
         })
 

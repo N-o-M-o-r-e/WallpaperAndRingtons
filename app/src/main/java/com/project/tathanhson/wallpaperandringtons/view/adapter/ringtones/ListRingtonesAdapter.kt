@@ -1,5 +1,6 @@
 package com.project.tathanhson.wallpaperandringtons.view.adapter.ringtones
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.media.MediaPlayer
 import android.view.LayoutInflater
@@ -39,8 +40,8 @@ class ListRingtonesAdapter(
             init {
                 itemView.setOnClickListener {
                     val position = adapterPosition
-                    val itemSelected = ringtonesList[position]
-                    CommonObject.positionItemRingtonw.value = position
+                    CommonObject.positionItemRingtone.value = position
+                    CommonObject.listRingtone.value = ringtonesList
                 }
             }
     }
@@ -81,6 +82,7 @@ class ListRingtonesAdapter(
         holder.binding.btnPlayOrPause.setImageResource(iconResId)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun handleItemClick(position: Int) {
         if (selectedPosition != position) {
             // Ngừng nhạc của item hiện tại (nếu có)
@@ -105,6 +107,7 @@ class ListRingtonesAdapter(
         mediaPlayer = null
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun playRingtone(context: Context, ringtone: Ringtone) {
         stopRingtone()
         try {

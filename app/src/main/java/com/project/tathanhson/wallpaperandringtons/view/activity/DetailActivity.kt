@@ -1,7 +1,6 @@
 package com.project.tathanhson.wallpaperandringtons.view.activity
 
 import android.content.Intent
-import com.project.tathanhson.wallpaperandringtons.R
 import com.project.tathanhson.wallpaperandringtons.databinding.ActivityDetailBinding
 import com.project.tathanhson.wallpaperandringtons.view.fragment.favorite.DetailFavoriteFragment
 import com.project.tathanhson.wallpaperandringtons.view.fragment.livewallpaper.DetailLiveWallpaperFragment
@@ -30,6 +29,11 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
             3-> showFragmemnt(DetailFavoriteFragment())
         }
 
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        onBackPressedDispatcher.onBackPressed()
     }
 
 }
