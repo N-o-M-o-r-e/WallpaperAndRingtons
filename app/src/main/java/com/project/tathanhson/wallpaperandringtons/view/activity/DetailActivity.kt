@@ -1,22 +1,20 @@
 package com.project.tathanhson.wallpaperandringtons.view.activity
 
-import android.content.Intent
+import androidx.fragment.app.Fragment
+import com.project.tathanhson.wallpaperandringtons.R
 import com.project.tathanhson.wallpaperandringtons.databinding.ActivityDetailBinding
+import com.project.tathanhson.wallpaperandringtons.view.activity.base.BaseActivity
 import com.project.tathanhson.wallpaperandringtons.view.fragment.favorite.DetailFavoriteFragment
 import com.project.tathanhson.wallpaperandringtons.view.fragment.livewallpaper.DetailLiveWallpaperFragment
 import com.project.tathanhson.wallpaperandringtons.view.fragment.ringtones.DetailRingtonesFragment
 import com.project.tathanhson.wallpaperandringtons.view.fragment.wallpaper.DetailWallpaperFragment
 
-class DetailActivity : BaseActivity<ActivityDetailBinding>() {
-    companion object {
-        val TAG = DetailActivity::class.java.name
-    }
-
-    override fun initViewBinding(): ActivityDetailBinding {
-        return ActivityDetailBinding.inflate(layoutInflater)
-    }
-
+class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding::inflate) {
     override fun initViewModel() {
+
+    }
+
+    override fun initData() {
 
     }
 
@@ -31,9 +29,14 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
 
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        onBackPressedDispatcher.onBackPressed()
+    fun showFragmemnt(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.frameLayout, fragment)
+            .commit()
+    }
+
+    companion object {
+        val TAG = DetailActivity::class.java.name
     }
 
 }

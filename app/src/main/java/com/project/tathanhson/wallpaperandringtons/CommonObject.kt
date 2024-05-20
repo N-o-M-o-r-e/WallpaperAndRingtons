@@ -1,4 +1,4 @@
-package com.example.wallpagerandringtons.viewmodel.utils
+package com.project.tathanhson.wallpaperandringtons
 
 import android.app.WallpaperManager
 import android.graphics.Bitmap
@@ -6,20 +6,24 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
+import com.project.tathanhson.mediaplayer.model.Data
 import com.project.tathanhson.wallpaperandringtons.model.wallpaper.WallpaperItem
-import com.project.tathanhson.wallpaperandringtons.MyApplication
-import com.project.tathanhson.wallpaperandringtons.model.ringtones.Ringtone
 import com.project.tathanhson.wallpaperandringtons.view.fragment.wallpaper.DetailWallpaperFragment
 
 object CommonObject {
+
+    //livedata Wallpaper
     var iamgeWallperLD = MutableLiveData<WallpaperItem>()
     var positionItemWallpaper = MutableLiveData<Int>()
 
-    var itemTitleRingtone = MutableLiveData<String>()
-    var positionItemRingtone = MutableLiveData<Int>()
-    var listRingtone = MutableLiveData<ArrayList<Ringtone>>()
+    //livedata Ringtone
+    var listCategorysRingtone = MutableLiveData<ArrayList<String>>()  // list category
+    var categoryRingtone = MutableLiveData<String>() // category in list
 
-    var imageFile = ""
+    var listDataRingtone = MutableLiveData<ArrayList<Data>>() // listData
+    var positionDataRingtone = MutableLiveData<Int>()  // position item in listData
+
+
 
     fun setWallpaperToScreen(view: DetailWallpaperFragment, imagePath: String, flagSystem: String) {
         Glide.with(view)
@@ -61,4 +65,5 @@ object CommonObject {
                 }
             })
     }
+
 }

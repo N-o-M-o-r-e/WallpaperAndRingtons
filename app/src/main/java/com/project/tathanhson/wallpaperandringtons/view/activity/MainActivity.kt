@@ -1,7 +1,7 @@
 package com.project.tathanhson.wallpaperandringtons.view.activity
 
 import android.content.Intent
-import android.icu.text.Transliterator.Position
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.project.tathanhson.wallpaperandringtons.model.wallpaper.WallpaperItem
@@ -10,23 +10,33 @@ import com.project.tathanhson.wallpaperandringtons.view.fragment.livewallpaper.D
 import com.project.tathanhson.wallpaperandringtons.view.fragment.ringtones.RingtonesFragment
 import com.project.tathanhson.wallpaperandringtons.view.fragment.wallpaper.WallpaperFragment
 import com.example.wallpagerandringtons.viewmodel.WallpaperVM
-import com.example.wallpagerandringtons.viewmodel.utils.CommonObject
+import com.project.tathanhson.wallpaperandringtons.CommonObject
 import com.project.tathanhson.wallpaperandringtons.R
 import com.project.tathanhson.wallpaperandringtons.databinding.ActivityMainBinding
+import com.project.tathanhson.wallpaperandringtons.view.activity.base.BaseActivity
 import com.project.tathanhson.wallpaperandringtons.viewmodel.RingtonesVM
 
-class MainActivity : BaseActivity<ActivityMainBinding>(){
-
+class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
 
     private lateinit var wallpaperVM: WallpaperVM
     private lateinit var ringtonesVM: RingtonesVM
     private val frgWallpaper = WallpaperFragment()
     private val frgRingtone = RingtonesFragment()
 
-
     override fun initViewModel() {
         wallpaperVM = ViewModelProvider(this)[WallpaperVM::class.java]
         ringtonesVM = ViewModelProvider(this)[RingtonesVM::class.java]
+    }
+
+    override fun initData() {
+        wallpaperVM.ldItemWallpaper.observe(this, Observer { item ->
+            goToDetailWallpaper(item)
+        })
+
+        CommonObject.positionDataRingtone.observe(this, Observer { position ->
+            goToDetailRingtone()
+        })
+
     }
 
     override fun initView() {
@@ -51,22 +61,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(){
         binding.btnFavorite.setOnClickListener {
             showFragmemnt(DetailFavoriteFragment())
         }
-        initData()
-        checkInternet()
-    }
-
-    private fun initData() {
-        wallpaperVM.ldItemWallpaper.observe(this, Observer { item ->
-            goToDetailWallpaper(item)
-        })
-
-        CommonObject.positionItemRingtone.observe(this, Observer { position ->
-            goToDetailRingtone()
-        })
-
-    }
-    override fun initViewBinding(): ActivityMainBinding {
-        return ActivityMainBinding.inflate(layoutInflater)
     }
 
     fun goToDetailWallpaper(item: WallpaperItem?) {
@@ -82,9 +76,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(){
         startActivity(intent)
     }
 
-
-    private fun checkInternet(){
-
+    fun showFragmemnt(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.frameLayout, fragment)
+            .commit()
     }
 
     companion object{

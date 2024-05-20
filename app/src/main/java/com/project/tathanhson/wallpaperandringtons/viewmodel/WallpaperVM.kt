@@ -20,9 +20,34 @@ class WallpaperVM : ViewModel() {
     var ldItemTitle = MutableLiveData<Title?>()
 
 
+    // Get API Category
+    fun getApiCategoryWallpaper() {
+        val listTitle = RetrofitHelper.getInstance().create(Api::class.java)
+        listTitle.getWallpaperTitle().enqueue(object : Callback<ListTitle> {
+            override fun onResponse(call: Call<ListTitle>,response: Response<ListTitle>) {
+                val listTitleWallpaper = response.body()
+                listTitleWallpaper?.let {
+                    ldListTitle.value = listTitleWallpaper
+//                    listTitleWallpaper.remove()
+                    ldItemTitle.value = listTitleWallpaper[0]
+                }
+            }
+
+            override fun onFailure(call: Call<ListTitle>, t: Throwable) {
+
+            }
+        })
+    }
+
+    //Get detail from CategoryID
     fun getApiWallpaperDetail(categoryId: Int) {
         val listWallpaper = RetrofitHelper.getInstance().create(Api::class.java)
+
+
+
         listWallpaper.getWallpaperList(categoryId,100).enqueue(object : Callback<WallpaperList> {
+
+
             override fun onResponse(call: Call<WallpaperList>, response: Response<WallpaperList>) {
                 val listWallpaper = response.body()
                 listWallpaper?.let {
@@ -38,26 +63,7 @@ class WallpaperVM : ViewModel() {
         })
     }
 
-    fun getApiWallpaperTitle(){
-        val listTitle = RetrofitHelper.getInstance().create(Api::class.java)
-        listTitle.getWallpaperTitle().enqueue(object  : Callback<ListTitle> {
-            override fun onResponse(
-                call: Call<ListTitle>,
-                response: Response<ListTitle>
-            ) {
-                val listTitleWallpaper = response.body()
-                listTitleWallpaper?.let {
-                    ldListTitle.value = listTitleWallpaper
-                    ldItemTitle.value = listTitleWallpaper[0]
-                        Log.e("AAAAAAAAAAAAAAAAAAAAA", "onResponse: "+listTitleWallpaper )
-                }
-            }
 
-            override fun onFailure(call: Call<ListTitle>, t: Throwable) {
-                Log.e("AAAAAAAAAAAAAAAAAAAAA", "onFailure: "+t.message )
-            }
-        } )
-    }
 
     fun postUpdateFavorite(wallpaperId: Int) {
         val favoriteWallpaper = RetrofitHelper.getInstance().create(Api::class.java)

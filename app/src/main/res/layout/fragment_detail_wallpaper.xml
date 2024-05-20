@@ -1,108 +1,109 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.fragment.wallpaper.DetailWallpaperFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <include android:id="@+id/progressBar"
-        layout="@layout/include_progress_bar"
-        android:visibility="invisible"
-        />
+    <data>
 
-
-
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/statusBar"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:elevation="2dp"
-        android:layout_marginTop="12dp"
-        app:layout_constraintTop_toTopOf="parent">
-        <ImageView
-            android:id="@+id/btnClose"
-            android:layout_width="52dp"
-            android:layout_height="52dp"
-            android:src="@drawable/ic_close"
-            android:padding="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Swipe up"
-            android:gravity="center"
-            android:textColor="@color/gray"
-            android:drawableTop="@drawable/ic_swip_up"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <ImageView
-        android:id="@+id/imgDetail"
-        android:scaleType="centerCrop"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:elevation="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        tools:context=".view.fragment.wallpaper.DetailWallpaperFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@drawable/background_bottom_bar"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:elevation="2dp"
-        android:layout_marginHorizontal="16dp"
-        app:layout_constraintBottom_toBottomOf="parent">
+        <include
+            android:id="@+id/progressBar"
+            layout="@layout/include_progress_bar"
+            android:visibility="invisible" />
 
-        <TextView
-            android:id="@+id/btnShare"
-            android:layout_width="wrap_content"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/statusBar"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:elevation="2dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/btnClose"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:src="@drawable/ic_close"
+                android:padding="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Swipe up"
+                android:gravity="center"
+                android:textColor="@color/gray"
+                android:drawableTop="@drawable/ic_swip_up"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/imgDetail"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:elevation="0dp"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            android:drawablePadding="8dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/background_bottom_bar"
+            android:orientation="horizontal"
             android:gravity="center"
-            android:text="Share"
-            android:textColor="@color/white"
-            app:drawableStartCompat="@drawable/ic_share"
-            app:layout_constraintEnd_toStartOf="@+id/btnDownload"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:elevation="2dp"
+            android:layout_marginHorizontal="16dp"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-        <TextView
-            android:id="@+id/btnDownload"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            <TextView
+                android:id="@+id/btnShare"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
 
-            android:drawablePadding="8dp"
-            android:gravity="center"
-            android:text="114k"
-            android:textColor="@color/white"
-            app:drawableStartCompat="@drawable/ic_download"
-            app:layout_constraintEnd_toStartOf="@+id/btnFavorite"
-            app:layout_constraintStart_toEndOf="@+id/btnShare" />
+                android:drawablePadding="8dp"
+                android:gravity="center"
+                android:text="Share"
+                android:textColor="@color/white"
+                app:drawableStartCompat="@drawable/ic_share"
+                app:layout_constraintEnd_toStartOf="@+id/btnDownload"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
-            android:id="@+id/btnFavorite"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:drawablePadding="8dp"
-            android:gravity="center"
-            android:text="213"
-            android:textColor="@color/white"
-            app:drawableStartCompat="@drawable/ic_favorite_off"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btnDownload" />
+            <TextView
+                android:id="@+id/btnDownload"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                android:drawablePadding="8dp"
+                android:gravity="center"
+                android:text="114k"
+                android:textColor="@color/white"
+                app:drawableStartCompat="@drawable/ic_download"
+                app:layout_constraintEnd_toStartOf="@+id/btnFavorite"
+                app:layout_constraintStart_toEndOf="@+id/btnShare" />
+
+            <TextView
+                android:id="@+id/btnFavorite"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:drawablePadding="8dp"
+                android:gravity="center"
+                android:text="213"
+                android:textColor="@color/white"
+                app:drawableStartCompat="@drawable/ic_favorite_off"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btnDownload" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

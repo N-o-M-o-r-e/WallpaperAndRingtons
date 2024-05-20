@@ -13,7 +13,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.project.tathanhson.wallpaperandringtons.model.wallpaper.WallpaperItem
 import com.project.tathanhson.wallpaperandringtons.model.wallpaper.WallpaperList
 import com.example.wallpagerandringtons.viewmodel.WallpaperVM
-import com.example.wallpagerandringtons.viewmodel.utils.CommonObject
+import com.project.tathanhson.wallpaperandringtons.CommonObject
 import com.project.tathanhson.wallpaperandringtons.R
 import com.project.tathanhson.wallpaperandringtons.databinding.ItemWallpaperBinding
 

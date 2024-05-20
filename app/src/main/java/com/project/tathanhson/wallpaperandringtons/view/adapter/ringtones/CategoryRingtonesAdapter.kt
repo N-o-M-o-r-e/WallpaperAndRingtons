@@ -7,28 +7,28 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
-import com.example.wallpagerandringtons.viewmodel.utils.CommonObject
+import com.project.tathanhson.wallpaperandringtons.CommonObject
 import com.project.tathanhson.wallpaperandringtons.R
 import com.project.tathanhson.wallpaperandringtons.databinding.ItemTitleBinding
 import com.project.tathanhson.wallpaperandringtons.viewmodel.RingtonesVM
 
-class TitleRingtonesAdapter(
+class CategoryRingtonesAdapter(
     private val context: Context,
     private val viewModel: RingtonesVM,
     private val lifecycleOwner: LifecycleOwner,
     private val listTitle: ArrayList<String>
-) : RecyclerView.Adapter<TitleRingtonesAdapter.ItemHolder>() {
+) : RecyclerView.Adapter<CategoryRingtonesAdapter.ItemHolder>() {
 
     var selectedPosition: Int = 0
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): TitleRingtonesAdapter.ItemHolder {
+    ): CategoryRingtonesAdapter.ItemHolder {
         val binding = ItemTitleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ItemHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: TitleRingtonesAdapter.ItemHolder, position: Int) {
+    override fun onBindViewHolder(holder: CategoryRingtonesAdapter.ItemHolder, position: Int) {
         val itemTitle = listTitle[position]
         holder.binding.btnTitle.text = itemTitle
 
@@ -55,8 +55,10 @@ class TitleRingtonesAdapter(
                     selectedPosition = position
                     notifyItemChanged(selectedPosition)
                     val itemSelect = listTitle[position]
-                    CommonObject.itemTitleRingtone.value = itemSelect
-//                    Log.d("TitleWallpaperAdapter", "Selected title: ${itemSelect}")
+
+                    //Get title selected
+                    CommonObject.categoryRingtone.value = itemSelect
+                    Log.d("TitleWallpaperAdapter", "Selected title: ${itemSelect}")
                 }
             }
         }

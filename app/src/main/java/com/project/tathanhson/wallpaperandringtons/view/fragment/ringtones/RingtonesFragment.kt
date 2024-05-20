@@ -1,80 +1,74 @@
 package com.project.tathanhson.wallpaperandringtons.view.fragment.ringtones
 
-import android.content.Context
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.wallpagerandringtons.viewmodel.utils.CommonObject
+import com.project.tathanhson.mediaplayer.model.Ringtone
+import com.project.tathanhson.wallpaperandringtons.CommonObject
+import com.project.tathanhson.wallpaperandringtons.OnMainCallback
+import com.project.tathanhson.wallpaperandringtons.R
 import com.project.tathanhson.wallpaperandringtons.databinding.FragmentRingtonesBinding
+import com.project.tathanhson.wallpaperandringtons.view.activity.base.BaseFragment
 import com.project.tathanhson.wallpaperandringtons.view.adapter.ringtones.ListRingtonesAdapter
-import com.project.tathanhson.wallpaperandringtons.view.adapter.ringtones.TitleRingtonesAdapter
+import com.project.tathanhson.wallpaperandringtons.view.adapter.ringtones.CategoryRingtonesAdapter
 import com.project.tathanhson.wallpaperandringtons.viewmodel.RingtonesVM
 
 
-class RingtonesFragment : Fragment() {
-    private lateinit var context: Context
-    private lateinit var binding: FragmentRingtonesBinding
+class RingtonesFragment :
+    BaseFragment<FragmentRingtonesBinding>(FragmentRingtonesBinding::inflate), OnMainCallback {
     lateinit var viewModel: RingtonesVM
-    private lateinit var adapterTitle : TitleRingtonesAdapter
+    private lateinit var mediaPlayerList: ArrayList<Ringtone>
+    private lateinit var adapterTitle : CategoryRingtonesAdapter
     private lateinit var adapterListRingtones: ListRingtonesAdapter
-    private var title =""
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        this.context = context
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentRingtonesBinding.inflate(inflater, container, false)
+    private var title = ""
+    override fun initViewModel() {
         viewModel = ViewModelProvider(requireActivity())[RingtonesVM::class.java]
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        createData()
-        initView()
-    }
-
-    private fun createData() {
-        viewModel.getFoldersFromAssets(context)
-        viewModel.getRingtonesFromFolder(context,"mix" )
-    }
-
-    private fun initView() {
-        viewModel.ldListFolder.observe(viewLifecycleOwner , Observer { titleFolder ->
-            titleFolder?.let {
-                adapterTitle = TitleRingtonesAdapter(context, viewModel, viewLifecycleOwner, titleFolder)
-                binding.rcvTitle.adapter = adapterTitle
-            }
+        CommonObject.categoryRingtone.observe(viewLifecycleOwner, Observer{ title ->
+            viewModel.getDataListForCategory(title)
         })
 
-        CommonObject.itemTitleRingtone.observe(viewLifecycleOwner , Observer { titleSelect->
+
+    }
+
+    override fun initData() {
+        mediaPlayerList = viewModel.readJSONToMediaPlayerList(resources, R.raw.ringtone)
+    }
+
+    override fun initView() {
+        //RecyclerView Category
+        CommonObject.listCategorysRingtone.observe(viewLifecycleOwner, Observer { categories ->
+            //Createdefault value
+            viewModel.getDataListForCategory(categories[0])
+
+            binding.rcvTitle.layoutManager = LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false)
+            adapterTitle = CategoryRingtonesAdapter(mContext, viewModel, viewLifecycleOwner, categories)
+            binding.rcvTitle.adapter = adapterTitle
+        })
+
+        CommonObject.categoryRingtone.observe(viewLifecycleOwner , Observer { titleSelect->
             run {
                 titleSelect?.let {
                     title = it
-                    //creat list ringtone with titleSelected
-                    viewModel.getRingtonesFromFolder(context, titleSelect)
                 }
             }
         })
 
-        viewModel.ldItemFolder.observe(viewLifecycleOwner, Observer{ listRingtones ->
-            binding.rcvRingtones.layoutManager = LinearLayoutManager(context)
-            adapterListRingtones = ListRingtonesAdapter(context, viewModel, viewLifecycleOwner, listRingtones, title)
+        //RecyclerView List ringtones
+        CommonObject.listDataRingtone.observe(this, Observer { listRingtoneData ->
+            binding.rcvRingtones.layoutManager = LinearLayoutManager(mContext)
+            adapterListRingtones = ListRingtonesAdapter(mContext, viewModel, viewLifecycleOwner, listRingtoneData, title)
             binding.rcvRingtones.adapter = adapterListRingtones
         })
 
 
     }
 
+    override fun onPause() {
+        super.onPause()
+        adapterListRingtones.stopMediaRingtone()
+    }
 
+    override fun showActivity(tag: String?, data: Any?) {
+
+    }
 }

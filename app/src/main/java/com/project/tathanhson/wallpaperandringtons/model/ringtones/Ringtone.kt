@@ -1,6 +1,6 @@
-package com.project.tathanhson.wallpaperandringtons.model.ringtones
+package com.project.tathanhson.mediaplayer.model
 
 data class Ringtone(
-    val folderName: String,
-    val fileName: String
+    val category: String,
+    val data: ArrayList<Data>
 )

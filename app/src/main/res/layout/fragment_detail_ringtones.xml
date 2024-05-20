@@ -1,227 +1,250 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/black">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/btnClose"
-        android:layout_width="52dp"
-        android:layout_height="52dp"
-        android:padding="16dp"
-        android:layout_marginTop="12dp"
-        android:src="@drawable/ic_close"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <TextView
-        android:id="@+id/tvName"
-        style="@style/title_bold_16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Take care of you"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnClose" />
+    </data>
 
-    <ImageView
-        android:id="@+id/btnPlayOrPause"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:background="@drawable/background_ringtone_blue_circle"
-        android:padding="60dp"
-        android:src="@drawable/img_pause"
-        app:layout_constraintBottom_toTopOf="@+id/viewAction"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.6" />
-
-    <ImageView
-        android:id="@+id/btnBack"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:padding="24dp"
-        android:layout_marginEnd="-20dp"
-        android:src="@drawable/ic_back_voice"
-        android:elevation="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/btnPlayOrPause"
-        app:layout_constraintEnd_toStartOf="@+id/btnPlayOrPause"
-        app:layout_constraintTop_toTopOf="@+id/btnPlayOrPause"
-        tools:ignore="NegativeMargin" />
-
-    <ImageView
-        android:id="@+id/btnNext"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:padding="24dp"
-        android:layout_marginStart="-20dp"
-        android:src="@drawable/ic_next_voice"
-        android:elevation="4dp"
-        app:layout_constraintStart_toEndOf="@+id/btnPlayOrPause"
-        app:layout_constraintTop_toTopOf="@+id/btnPlayOrPause"
-        app:layout_constraintBottom_toBottomOf="@+id/btnPlayOrPause"
-        tools:ignore="NegativeMargin" />
-
-    <SeekBar
-        android:id="@+id/seekBar"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="2dp"
-        android:minWidth="2dp"
-        android:maxHeight="3dp"
-        android:maxWidth="3dp"
-        android:progress="50"
-        android:progressDrawable="@drawable/custom_seekbar"
-        android:thumb="@drawable/custom_thumb"
+        android:layout_height="match_parent"
+        android:background="@color/black">
 
-        app:layout_constraintTop_toBottomOf="@+id/btnPlayOrPause"
-        />
-
-    <TextView
-        android:id="@+id/tvCountTime"
-        style="@style/title_regular_12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="00:10"
-        android:layout_marginHorizontal="20dp"
-        app:layout_constraintStart_toStartOf="@+id/seekBar"
-        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
-
-    <TextView
-        android:id="@+id/tvTime"
-        style="@style/title_regular_12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="00:10"
-        app:layout_constraintEnd_toEndOf="@+id/seekBar"
-        android:layout_marginHorizontal="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
-
-    <LinearLayout
-        android:id="@+id/viewAction"
-        android:layout_width="match_parent"
-        android:layout_height="132dp"
-        android:layout_margin="20dp"
-        android:orientation="vertical"
-        android:background="@drawable/background_action"
-        app:layout_constraintBottom_toTopOf="@+id/bottomBar">
-
-        <TextView
-            android:id="@+id/tvSetAs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/nunito_semibold"
-            android:gravity="center"
-            android:text="Set as"
-            android:textColor="@color/white"
-            android:textSize="16sp"
+        <ImageView
+            android:id="@+id/btnClose"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:padding="16dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/ic_close"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/tvName"
+            style="@style/title_bold_16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Take care of you"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnClose" />
+
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvSetAs">
-
-            <TextView
-                android:id="@+id/btnAlarm"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                style="@style/notito_semibold_16sp"
-                android:layout_height="wrap_content"
-                android:text="Alarm"
-                app:drawableTopCompat="@drawable/ic_alarm" />
-
-            <TextView
-                android:id="@+id/btnNotification"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                style="@style/notito_semibold_16sp"
-                android:layout_height="wrap_content"
-                android:text="Notification"
-                app:drawableTopCompat="@drawable/ic_notification" />
-
-            <TextView
-                android:id="@+id/btnRingtones"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                style="@style/notito_semibold_16sp"
-                android:layout_height="wrap_content"
-                android:text="Alarm"
-                app:drawableTopCompat="@drawable/ic_ringtone" />
+            android:id="@+id/btnPlayOrPause"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            app:layout_constraintBottom_toTopOf="@+id/viewAction"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.6">
+            <ImageView
+                android:id="@+id/btnPlay"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:background="@drawable/background_ringtone_blue_circle"
+                android:padding="48dp"
+                android:visibility="gone"
+                android:src="@drawable/img_play"
+                />
+            <ImageView
+                android:id="@+id/btnPause"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:background="@drawable/background_ringtone_blue_circle"
+                android:padding="60dp"
+                android:visibility="visible"
+                android:src="@drawable/img_pause"
+                />
         </LinearLayout>
 
-    </LinearLayout>
-    
-    
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/bottomBar"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@drawable/background_bottom_bar"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:elevation="2dp"
-        android:layout_marginHorizontal="20dp"
-        app:layout_constraintBottom_toBottomOf="parent">
+
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:padding="24dp"
+            android:layout_marginEnd="-20dp"
+            android:src="@drawable/ic_back_voice"
+            android:elevation="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/btnPlayOrPause"
+            app:layout_constraintEnd_toStartOf="@+id/btnPlayOrPause"
+            app:layout_constraintTop_toTopOf="@+id/btnPlayOrPause"
+            tools:ignore="NegativeMargin" />
+
+        <ImageView
+            android:id="@+id/btnNext"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:padding="24dp"
+            android:layout_marginStart="-20dp"
+            android:src="@drawable/ic_next_voice"
+            android:elevation="4dp"
+            app:layout_constraintStart_toEndOf="@+id/btnPlayOrPause"
+            app:layout_constraintTop_toTopOf="@+id/btnPlayOrPause"
+            app:layout_constraintBottom_toBottomOf="@+id/btnPlayOrPause"
+            tools:ignore="NegativeMargin" />
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="2dp"
+            android:minWidth="2dp"
+            android:maxHeight="3dp"
+            android:maxWidth="3dp"
+            android:progress="0"
+            android:progressDrawable="@drawable/custom_seekbar"
+            android:thumb="@drawable/custom_thumb"
+
+            app:layout_constraintTop_toBottomOf="@+id/btnPlayOrPause" />
 
         <TextView
-            android:id="@+id/btnShare"
+            android:id="@+id/tvCountTime"
+            style="@style/title_regular_12"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-
-            android:drawablePadding="8dp"
-            android:gravity="center"
-            android:text="Share"
-            android:textColor="@color/white"
-            app:drawableStartCompat="@drawable/ic_share"
-            app:layout_constraintEnd_toStartOf="@+id/btnDownload"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:layout_height="wrap_content"
+            android:text="00:00"
+            android:layout_marginHorizontal="20dp"
+            app:layout_constraintStart_toStartOf="@+id/seekBar"
+            app:layout_constraintTop_toBottomOf="@+id/seekBar" />
 
         <TextView
-            android:id="@+id/btnDownload"
+            android:id="@+id/tvTime"
+            style="@style/title_regular_12"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:text="00:10"
+            app:layout_constraintEnd_toEndOf="@+id/seekBar"
+            android:layout_marginHorizontal="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/seekBar" />
 
-            android:drawablePadding="8dp"
-            android:gravity="center"
-            android:text="114k"
-            android:textColor="@color/white"
-            app:drawableStartCompat="@drawable/ic_download"
-            app:layout_constraintEnd_toStartOf="@+id/btnFavorite"
-            app:layout_constraintStart_toEndOf="@+id/btnShare" />
+        <LinearLayout
+            android:id="@+id/viewAction"
+            android:layout_width="match_parent"
+            android:layout_height="132dp"
+            android:layout_margin="20dp"
+            android:orientation="vertical"
+            android:background="@drawable/background_action"
+            app:layout_constraintBottom_toTopOf="@+id/bottomBar">
 
-        <TextView
-            android:id="@+id/btnFavorite"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:drawablePadding="8dp"
+            <TextView
+                android:id="@+id/tvSetAs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/nunito_semibold"
+                android:gravity="center"
+                android:text="Set as"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvSetAs">
+
+                <TextView
+                    android:id="@+id/btnAlarm"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    style="@style/notito_semibold_16sp"
+                    android:layout_height="wrap_content"
+                    android:text="Alarm"
+                    app:drawableTopCompat="@drawable/ic_alarm" />
+
+                <TextView
+                    android:id="@+id/btnNotification"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    style="@style/notito_semibold_16sp"
+                    android:layout_height="wrap_content"
+                    android:text="Notification"
+                    app:drawableTopCompat="@drawable/ic_notification" />
+
+                <TextView
+                    android:id="@+id/btnRingtones"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    style="@style/notito_semibold_16sp"
+                    android:layout_height="wrap_content"
+                    android:text="Alarm"
+                    app:drawableTopCompat="@drawable/ic_ringtone" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/background_bottom_bar"
+            android:orientation="horizontal"
             android:gravity="center"
-            android:text="213"
-            android:textColor="@color/white"
-            app:drawableStartCompat="@drawable/ic_favorite_off"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btnDownload" />
+            android:elevation="2dp"
+            android:layout_marginHorizontal="20dp"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/btnShare"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                android:drawablePadding="8dp"
+                android:gravity="center"
+                android:text="Share"
+                android:textColor="@color/white"
+                app:drawableStartCompat="@drawable/ic_share"
+                app:layout_constraintEnd_toStartOf="@+id/btnDownload"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/btnDownload"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                android:drawablePadding="8dp"
+                android:gravity="center"
+                android:text="114k"
+                android:textColor="@color/white"
+                app:drawableStartCompat="@drawable/ic_download"
+                app:layout_constraintEnd_toStartOf="@+id/btnFavorite"
+                app:layout_constraintStart_toEndOf="@+id/btnShare" />
+
+            <TextView
+                android:id="@+id/btnFavorite"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:drawablePadding="8dp"
+                android:gravity="center"
+                android:text="213"
+                android:textColor="@color/white"
+                app:drawableStartCompat="@drawable/ic_favorite_off"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btnDownload" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--    <View-->
+        <!--        android:id="@+id/viewTestAdsBanner"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="60dp"-->
+        <!--        android:visibility="gone"-->
+        <!--        app:layout_constraintBottom_toBottomOf="parent"/>-->
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-<!--    <View-->
-<!--        android:id="@+id/viewTestAdsBanner"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="60dp"-->
-<!--        android:visibility="gone"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"/>-->
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
