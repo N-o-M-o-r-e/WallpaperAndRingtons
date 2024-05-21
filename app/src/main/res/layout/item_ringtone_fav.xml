@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="96dp"
+    android:layout_height="96dp"
+    android:layout_margin="8dp"
+    android:orientation="horizontal"
+    android:gravity="center|start"
+    >
+
+    <LinearLayout
+        android:id="@+id/viewRingtone"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:background="@drawable/background_ringtone_blue">
+
+        <ImageView
+            android:id="@+id/btnPlay"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/ic_play"
+            android:visibility="visible"
+            android:padding="24dp"
+            />
+
+        <ImageView
+            android:id="@+id/btnPause"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:visibility="gone"
+            android:src="@drawable/ic_pause"
+            android:padding="24dp"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

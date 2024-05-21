@@ -13,6 +13,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
+import com.project.tathanhson.wallpaperandringtons.CommonObject
 
 typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
 
@@ -35,6 +36,8 @@ abstract class BaseView : AppCompatActivity() {
         initData()
         initView()
     }
+
+
 
     open fun isIgnoreTransparent(): Boolean = false
     protected abstract fun bindView()

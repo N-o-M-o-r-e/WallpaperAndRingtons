@@ -124,6 +124,7 @@ class ListRingtonesAdapter(
         mediaPlayer?.stop()
         mediaPlayer?.release()
         mediaPlayer = null
+
     }
 
     fun viewPlay(holder: ItemHolder) {

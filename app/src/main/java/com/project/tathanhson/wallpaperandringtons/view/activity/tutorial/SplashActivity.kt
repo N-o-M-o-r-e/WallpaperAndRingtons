@@ -1,6 +1,7 @@
 package com.project.tathanhson.wallpaperandringtons.view.activity.tutorial
 
 import android.content.Intent
+import com.project.tathanhson.wallpaperandringtons.CommonObject
 import com.project.tathanhson.wallpaperandringtons.databinding.ActivitySplashBinding
 import com.project.tathanhson.wallpaperandringtons.view.activity.base.BaseActivity
 import com.project.tathanhson.wallpaperandringtons.view.activity.tutorial.onbroading.OnBroadAct
@@ -18,7 +19,9 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
     }
 
     override fun initData() {
-
+        CommonObject.itemWallpaper.value = null
+        CommonObject.positionDataRingtone.value = null
+        CommonObject.itemLiveWallpaper.value = null
     }
 
     override fun initView() {

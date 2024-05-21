@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 
 class DetailRingtonesFragment :
     BaseFragment<FragmentDetailRingtonesBinding>(FragmentDetailRingtonesBinding::inflate) {
-    private lateinit var viewModel: RingtonesVM
+        lateinit var viewModel: RingtonesVM
     private var mediaPlayer: MediaPlayer? = null
     private var listRingtone = ArrayList<Data>()
     private var url = ""
@@ -34,20 +34,20 @@ class DetailRingtonesFragment :
 
     @SuppressLint("LogConditional")
     override fun initData() {
-        CommonObject.listDataRingtone.observe(viewLifecycleOwner,  { listRingtone ->
+        CommonObject.listDataRingtone.observe(viewLifecycleOwner) { listRingtone ->
             this.listRingtone = listRingtone
 
-        })
-        CommonObject.positionDataRingtone.observe(viewLifecycleOwner,  { position ->
+        }
+        CommonObject.positionDataRingtone.observe(viewLifecycleOwner) { position ->
             binding.tvName.text = listRingtone[position].name
             binding.tvTime.text = listRingtone[position].time
             binding.seekBar.max = formatTimeToInt(listRingtone[position].time)
-            Log.d(TAG, "initData: "+formatTimeToInt(listRingtone[position].time))
+            Log.d(TAG, "initData: " + formatTimeToInt(listRingtone[position].time))
             url = listRingtone[position].link
             playMediaRingtone(url)
             index = position
             viewPlay()
-        })
+        }
 
     }
 
@@ -75,6 +75,10 @@ class DetailRingtonesFragment :
             stopMediaRingtone()
             index--
             indexMediaRingtone(index)
+        }
+
+        binding.btnClose.setOnClickListener {
+            requireActivity().finish()
         }
 
     }

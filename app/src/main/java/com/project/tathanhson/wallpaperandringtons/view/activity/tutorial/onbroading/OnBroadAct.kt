@@ -13,6 +13,7 @@ import com.project.tathanhson.myapplication.OnBroadStep2Fragment
 import com.project.tathanhson.myapplication.OnBroadStep3Fragment
 import com.project.tathanhson.myapplication.OnBroadViewModel
 import com.project.tathanhson.myapplication.onSingleClickListener
+import com.project.tathanhson.wallpaperandringtons.CommonObject
 import com.project.tathanhson.wallpaperandringtons.databinding.ActivityOnbroadingBinding
 import com.project.tathanhson.wallpaperandringtons.view.activity.base.BaseActivity
 import com.project.tathanhson.wallpaperandringtons.view.activity.MainActivity
@@ -25,6 +26,8 @@ class OnBroadAct : BaseActivity<ActivityOnbroadingBinding>(ActivityOnbroadingBin
         viewModel = ViewModelProvider(this)[OnBroadViewModel::class.java]
 
     }
+
+
 
     override fun initData() {
         val pagerAdapter = object : FragmentStateAdapter(this) {

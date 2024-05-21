@@ -2,6 +2,7 @@ package com.project.tathanhson.wallpaperandringtons.viewmodel
 
 import android.content.res.Resources
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.project.tathanhson.wallpaperandringtons.CommonObject
 import com.project.tathanhson.mediaplayer.model.Data
@@ -11,6 +12,7 @@ import org.json.JSONArray
 class RingtonesVM : ViewModel() {
     private val ringtones: ArrayList<Ringtone> = ArrayList()
     private var isDataInitialized = false
+    var positionDataRingtone = MutableLiveData<Int>()
 
     fun readJSONToMediaPlayerList(resources: Resources, resourceId: Int): ArrayList<Ringtone> {
         if (!isDataInitialized) {

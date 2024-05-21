@@ -1,8 +1,9 @@
 package com.example.wallpagerandringtons.model.repository
 
-import com.project.tathanhson.wallpaperandringtons.model.wallpaper.ListTitle
+import com.project.tathanhson.wallpaperandringtons.model.livewallpaper.LiveWallpapers
+import com.project.tathanhson.wallpaperandringtons.model.wallpaper.Categories
 import com.project.tathanhson.wallpaperandringtons.model.wallpaper.WallpaperItem
-import com.project.tathanhson.wallpaperandringtons.model.wallpaper.WallpaperList
+import com.project.tathanhson.wallpaperandringtons.model.wallpaper.Wallpapers
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -15,10 +16,10 @@ interface Api {
     fun getWallpaperList(
         @Path("categoryId") categoryId: Int,
         @Query("limit") limit: Int
-    ): Call<WallpaperList>
+    ): Call<Wallpapers>
 
     @GET("category/")
-    fun getWallpaperTitle(): Call<ListTitle>
+    fun getWallpaperTitle(): Call<Categories>
 
     @POST("wallpapers/{id}/updatefavorite")
     fun postUpdateFavorite(@Path("id") wallpaperId: Int): Call<WallpaperItem>
@@ -26,4 +27,8 @@ interface Api {
     @POST("wallpapers/{id}/updatedownload")
     fun postUpdateDownload(@Path("id") wallpaperId: Int): Call<WallpaperItem>
 
+    @GET("wallpapers/category/{liveWallpaperId}")
+    fun getLiveWallpapers(
+        @Path("liveWallpaperId") categoryId: Int
+    ) : Call<LiveWallpapers>
 }

@@ -9,15 +9,16 @@ import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.example.wallpagerandringtons.viewmodel.WallpaperVM
+import com.project.tathanhson.wallpaperandringtons.CommonObject
 import com.project.tathanhson.wallpaperandringtons.R
 import com.project.tathanhson.wallpaperandringtons.databinding.ItemTitleBinding
-import com.project.tathanhson.wallpaperandringtons.model.wallpaper.Title
+import com.project.tathanhson.wallpaperandringtons.model.wallpaper.CategoryWallpaper
 
 class TitleWallpaperAdapter(
     private val context: Context,
     private val viewModel: WallpaperVM,
     private val lifecycleOwner: LifecycleOwner,
-    private val listTitle: ArrayList<Title>
+    private val listCategoryWallpaper: ArrayList<CategoryWallpaper>
 ) : RecyclerView.Adapter<TitleWallpaperAdapter.ItemHolder>() {
 
     var selectedPosition: Int = 0
@@ -30,8 +31,9 @@ class TitleWallpaperAdapter(
                     notifyItemChanged(selectedPosition)
                     selectedPosition = position
                     notifyItemChanged(selectedPosition)
-                    val itemSelect = listTitle[position]
-                    viewModel.ldItemTitle.value = itemSelect
+                    val itemSelect = listCategoryWallpaper[position]
+                    CommonObject.categoryWallpaper.value = itemSelect
+
                     Log.d("TitleWallpaperAdapter", "Selected title: ${itemSelect.name}")
                 }
             }
@@ -47,12 +49,12 @@ class TitleWallpaperAdapter(
     }
 
     override fun getItemCount(): Int {
-        return listTitle.size
+        return listCategoryWallpaper.size
     }
 
     @SuppressLint("LogConditional")
     override fun onBindViewHolder(holder: TitleWallpaperAdapter.ItemHolder, position: Int) {
-        val itemTitle = listTitle[position]
+        val itemTitle = listCategoryWallpaper[position]
         holder.binding.btnTitle.text = itemTitle.name
 
         // Đặt màu văn bản dựa trên vị trí đã chọn

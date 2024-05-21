@@ -10,29 +10,30 @@ import com.project.tathanhson.wallpaperandringtons.view.fragment.ringtones.Detai
 import com.project.tathanhson.wallpaperandringtons.view.fragment.wallpaper.DetailWallpaperFragment
 
 class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding::inflate) {
+
+
     override fun initViewModel() {
 
     }
 
     override fun initData() {
+        val key = intent.getStringExtra(MainActivity.KEY_EXTRA)
 
+        when (key) {
+            MainActivity.KEY_WALLPAPER -> showFragment(DetailWallpaperFragment())
+            MainActivity.KEY_RINGTONE -> showFragment(DetailRingtonesFragment())
+            MainActivity.KEY_LIVE_WALLPAPER -> showFragment(DetailLiveWallpaperFragment())
+            MainActivity.KEY_FAVORITE -> showFragment(DetailFavoriteFragment())
+        }
     }
 
     override fun initView() {
-        val receivedValue = intent.getIntExtra(MainActivity.KEY_RINGTONE, 0)
-        when (receivedValue){
-            0-> showFragmemnt(DetailWallpaperFragment())
-            1-> showFragmemnt(DetailRingtonesFragment())
-            2-> showFragmemnt(DetailLiveWallpaperFragment())
-            3-> showFragmemnt(DetailFavoriteFragment())
-        }
+
 
     }
 
-    fun showFragmemnt(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.frameLayout, fragment)
-            .commit()
+    fun showFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().replace(R.id.frameLayout, fragment).commit()
     }
 
     companion object {

@@ -6,8 +6,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.wallpagerandringtons.view.adapter.wallpapers.ListWallpaperAdapter
 import com.example.wallpagerandringtons.view.adapter.wallpapers.TitleWallpaperAdapter
 import com.example.wallpagerandringtons.viewmodel.WallpaperVM
+import com.project.tathanhson.wallpaperandringtons.CommonObject
 import com.project.tathanhson.wallpaperandringtons.databinding.FragmentWallpaperBinding
-import com.project.tathanhson.wallpaperandringtons.model.wallpaper.WallpaperList
+import com.project.tathanhson.wallpaperandringtons.model.wallpaper.Wallpapers
 import com.project.tathanhson.wallpaperandringtons.view.activity.base.BaseFragment
 
 
@@ -17,7 +18,7 @@ class WallpaperFragment :
     lateinit var viewModel: WallpaperVM
     private var adapter: ListWallpaperAdapter? = null
     private var adapterTitle: TitleWallpaperAdapter? = null
-    private var listWallpaper: WallpaperList? = null
+    private var listWallpaper: Wallpapers? = null
 
     override fun initViewModel() {
         viewModel = ViewModelProvider(requireActivity())[WallpaperVM::class.java]
@@ -28,7 +29,7 @@ class WallpaperFragment :
         viewModel.getApiCategoryWallpaper()
 
         //sau đó call api với id của title trả về tương ứng
-        viewModel.ldItemTitle.observe(viewLifecycleOwner, Observer { titleSelected ->
+        CommonObject.categoryWallpaper.observe(viewLifecycleOwner, Observer { titleSelected ->
             titleSelected?.id.let {
                 viewModel.getApiWallpaperDetail(titleSelected!!.id)
             }
@@ -37,7 +38,7 @@ class WallpaperFragment :
 
     override fun initView() {
         //Quan sát dữ liệu khi call title category trả về để gán lên adapter
-        viewModel.ldListTitle.observe(viewLifecycleOwner, Observer { listTitle ->
+        CommonObject.listCategoryWallpaper.observe(viewLifecycleOwner, Observer { listTitle ->
             listTitle?.let {
                 adapterTitle =
                     TitleWallpaperAdapter(mContext, viewModel, viewLifecycleOwner, listTitle)
@@ -45,12 +46,13 @@ class WallpaperFragment :
             }
         })
 
-        viewModel.ldListWallpaper.observe(viewLifecycleOwner, Observer { wallpaperList ->
+        //List Wallpaper
+        CommonObject.listWallpaper.observe(viewLifecycleOwner, Observer { wallpaperList ->
             wallpaperList?.let {
                 listWallpaper = wallpaperList
                 adapter =
                     ListWallpaperAdapter(mContext, viewModel, viewLifecycleOwner, wallpaperList)
-                val layoutManager = GridLayoutManager(context, 3)
+                val layoutManager = GridLayoutManager(mContext, 3)
                 binding.rcvWallpaper.layoutManager = layoutManager
                 binding.rcvWallpaper.adapter = adapter
             }
