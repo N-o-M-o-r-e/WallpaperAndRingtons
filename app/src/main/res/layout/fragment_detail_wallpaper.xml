@@ -9,6 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/img_loadimage"
         tools:context=".view.fragment.wallpaper.DetailWallpaperFragment">
 
         <include
@@ -57,54 +58,54 @@
             android:elevation="0dp"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:background="@drawable/background_bottom_bar"
             android:orientation="horizontal"
             android:gravity="center"
             android:elevation="8dp"
+            android:padding="8dp"
             android:layout_marginHorizontal="16dp"
             app:layout_constraintBottom_toBottomOf="parent">
 
             <TextView
                 android:id="@+id/btnShare"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-
-                android:drawablePadding="8dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                style="@style/notito_semibold_16sp"
+                android:textSize="14sp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Share"
                 android:textColor="@color/white"
-                app:drawableStartCompat="@drawable/ic_share"
-                app:layout_constraintEnd_toStartOf="@+id/btnDownload"
-                app:layout_constraintStart_toStartOf="parent" />
+                android:drawableTop="@drawable/ic_share"
+                />
 
             <TextView
                 android:id="@+id/btnDownload"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-
-                android:drawablePadding="8dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                style="@style/notito_semibold_16sp"
+                android:textSize="14sp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="114k"
+                android:text="Download"
                 android:textColor="@color/white"
-                app:drawableStartCompat="@drawable/ic_download"
-                app:layout_constraintEnd_toStartOf="@+id/btnFavorite"
-                app:layout_constraintStart_toEndOf="@+id/btnShare" />
+                android:drawableTop="@drawable/ic_download" />
 
             <TextView
                 android:id="@+id/btnFavorite"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:drawablePadding="8dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                style="@style/notito_semibold_16sp"
+                android:textSize="14sp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="213"
+                android:text="Favorite"
                 android:textColor="@color/white"
-                app:drawableStartCompat="@drawable/ic_favorite_off"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/btnDownload" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:drawableTop="@drawable/ic_favorite_off"/>
+        </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

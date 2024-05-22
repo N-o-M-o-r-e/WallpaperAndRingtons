@@ -44,7 +44,7 @@ class LiveWallpaperVM : ViewModel() {
                 response.body()
             }
             override fun onFailure(call: Call<WallpaperItem>, t: Throwable) {
-//                Log.d("AAAAAAAAAAAAA", "onFailure: " + t.message)
+
             }
         })
     }

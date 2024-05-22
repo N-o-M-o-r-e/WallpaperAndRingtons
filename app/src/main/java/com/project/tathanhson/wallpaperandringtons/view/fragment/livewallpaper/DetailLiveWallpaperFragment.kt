@@ -8,8 +8,8 @@ import com.project.tathanhson.wallpaperandringtons.CommonObject
 import com.project.tathanhson.wallpaperandringtons.MyApplication
 import com.project.tathanhson.wallpaperandringtons.databinding.BottomDialogBinding
 import com.project.tathanhson.wallpaperandringtons.databinding.FragmentDetailLiveWallpaperBinding
+import com.project.tathanhson.wallpaperandringtons.model.livewallpaper.LiveWallpaperItem
 import com.project.tathanhson.wallpaperandringtons.view.activity.base.BaseFragment
-import com.project.tathanhson.wallpaperandringtons.view.fragment.wallpaper.DetailWallpaperFragment
 import com.project.tathanhson.wallpaperandringtons.viewmodel.LiveWallpaperVM
 
 class DetailLiveWallpaperFragment :
@@ -20,19 +20,27 @@ class DetailLiveWallpaperFragment :
 
     private var isClickFavorite : Boolean = false
 
+    private lateinit var item : LiveWallpaperItem
+
     override fun initViewModel() {
         viewModel = ViewModelProvider(this)[LiveWallpaperVM::class.java]
     }
 
     override fun initData() {
         //Observer Item LiveWallpaper
-        CommonObject.itemLiveWallpaper.observe(viewLifecycleOwner) { position ->
-            position?.let {
-                CommonObject.loadPathImageToView(mContext, it.img_large, binding.imgDetail)
-                binding.btnFavorite.text = it.favorite.toString()
-                binding.btnFavorite.text = it.favorite.toString()
-                binding.btnDownload.text = it.download.toString()
-                countFavorite = it.favorite
+        CommonObject.itemLiveWallpaper.observe(viewLifecycleOwner) { itemLiveWallpaper ->
+            item = itemLiveWallpaper
+            itemLiveWallpaper?.let {
+                CommonObject.loadPathImageToView(mContext, item.img_large, binding.imgDetail)
+
+                countFavorite = item.favorite
+
+                CommonObject.checkFavoriteLiveWallpaperUI(
+                    item,
+                    sharedPreferencesLiveWallpaper,
+                    resources,
+                    binding.btnFavorite
+                )
             }
         }
     }
@@ -54,7 +62,19 @@ class DetailLiveWallpaperFragment :
         }
 
         binding.btnFavorite.setOnClickListener {
-            listenerFavorites()
+            val id_live_wallpaper = item.id
+            if (!sharedPreferencesLiveWallpaper.isIdExist(id_live_wallpaper)){
+                //update favorite to API
+                viewModel.postUpdateFavorite(item.id)
+                val currentWallpapers = sharedPreferencesLiveWallpaper.getWallpapers()
+                currentWallpapers.add(id_live_wallpaper)
+
+                sharedPreferencesLiveWallpaper.saveWallpapers(currentWallpapers)
+
+                CommonObject.isFavoriteTrue(resources, binding.btnFavorite)
+            }else{
+                Toast.makeText(mContext, "Live Wallpaper is duplicate!", Toast.LENGTH_SHORT).show()
+            }
 
         }
 
@@ -111,19 +131,9 @@ class DetailLiveWallpaperFragment :
     }
 
     private fun listenerFavorites() {
-        if (!isClickFavorite){
-            countFavorite++
-            CommonObject.itemLiveWallpaper.observe(viewLifecycleOwner) { item ->
-                item?.let {
-                    //update favorite to API
-                    viewModel.postUpdateFavorite(it.id)
-                    binding.btnFavorite.text = countFavorite.toString()
-                    Log.d("AAAAAAAAAAAA" ,"initData: "+it.favorite.toString())
-                }
-            }
-            isClickFavorite = true
-        }
+
     }
+
 
     companion object {
         val TAG = DetailLiveWallpaperFragment::class.java.name

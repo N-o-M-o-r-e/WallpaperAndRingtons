@@ -1,5 +1,6 @@
 package com.project.tathanhson.wallpaperandringtons.view.fragment.wallpaper
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -21,23 +22,33 @@ class DetailWallpaperFragment : BaseFragment<FragmentDetailWallpaperBinding>(Fra
     private var countFavorite : Int =0
     private var isClickFavotite: Boolean = false
 
+
     override fun initViewModel() {
         viewModel = ViewModelProvider(requireActivity()).get(WallpaperVM::class.java)
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     override fun initData() {
         CommonObject.itemWallpaper.observe(viewLifecycleOwner, Observer { item ->
             item?.let {
                 imagePath = it.img_large
                 CommonObject.loadPathImageToView(mContext, imagePath, binding.imgDetail)
-                binding.btnFavorite.text = it.favorite.toString()
-                binding.btnDownload.text = it.download.toString()
-                countFavorite = it.favorite
+//                binding.btnFavorite.text = it.favorite.toString()
+//                binding.btnDownload.text = it.download.toString()
+//                countFavorite = it.favorite
+
+                CommonObject.checkFavoriteWallpaperUI(
+                    it,
+                    sharedPreferencesWallpaper,
+                    resources,
+                    binding.btnFavorite
+                )
             }
         })
 
     }
 
+    @SuppressLint("LogConditional")
     override fun initView() {
         binding.btnClose.setOnClickListener {
             requireActivity().finish()
@@ -55,21 +66,35 @@ class DetailWallpaperFragment : BaseFragment<FragmentDetailWallpaperBinding>(Fra
         }
 
         binding.btnFavorite.setOnClickListener {
-            if (!isClickFavotite) {
-                countFavorite++
-                CommonObject.itemWallpaper.observe(viewLifecycleOwner, Observer { item ->
-                    item?.let {
-                        //update favorite to API
-                        viewModel.postUpdateFavorite(it.id)
-                        binding.btnFavorite.text = countFavorite.toString()
-                        Log.d(TAG, "initData: "+it.favorite.toString())
+
+//            countFavorite++
+            CommonObject.itemWallpaper.observe(viewLifecycleOwner) { item ->
+                item?.let {
+                    val id_wallpaper = item.id
+
+                    if (!sharedPreferencesWallpaper.isIdExist(id_wallpaper)) {
+                        // Update favorite to API
+                        viewModel.postUpdateFavorite(id_wallpaper)
+//                        binding.btnFavorite.text = countFavorite.toString()
+//                        CommonObject.listWallpaperFav.add(it)
+                        // Lưu ID vào SharedPreferences
+
+                        val currentWallpapers = sharedPreferencesWallpaper.getWallpapers()
+                        currentWallpapers.add(id_wallpaper)
+                        sharedPreferencesWallpaper.saveWallpapers(currentWallpapers)
+                        CommonObject.isFavoriteTrue(resources, binding.btnFavorite)
+
+                    } else {
+                        // ID đã tồn tại, có thể thông báo hoặc thực hiện xử lý khác tùy thuộc vào yêu cầu của ứng dụng
+                        Log.e("AAAAAAAAA", "ID đã tồn tại trong SharedPreferences")
                     }
-                })
-                isClickFavotite = true
+                }
             }
+
 
         }
     }
+
 
     private fun listenerBottomDialog(
         mBinding: BottomDialogBinding,
@@ -121,7 +146,7 @@ class DetailWallpaperFragment : BaseFragment<FragmentDetailWallpaperBinding>(Fra
 
 
     companion object {
-        val TAG = DetailWallpaperFragment::class.java.name
+        val TAG = "AAAAAAAAAAAAAAAAAAAAAAAAAA"
         const val flagHome: String = "HOME"
         const val flagLock: String = "LOCK"
         const val flagHomeAndLock: String = "HOME_AND_LOCK"

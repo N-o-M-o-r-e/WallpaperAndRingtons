@@ -108,7 +108,6 @@ class WallpaperVM : ViewModel() {
                 }
 
             })
-
     }
 
 }

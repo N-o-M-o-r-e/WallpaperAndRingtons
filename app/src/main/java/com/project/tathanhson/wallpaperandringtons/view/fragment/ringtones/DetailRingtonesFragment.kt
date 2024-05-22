@@ -5,6 +5,7 @@ import android.media.MediaPlayer
 import android.util.Log
 import android.view.View
 import android.widget.SeekBar
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.project.tathanhson.mediaplayer.model.Data
 import com.project.tathanhson.wallpaperandringtons.CommonObject
@@ -23,7 +24,8 @@ class DetailRingtonesFragment :
         lateinit var viewModel: RingtonesVM
     private var mediaPlayer: MediaPlayer? = null
     private var listRingtone = ArrayList<Data>()
-    private var url = ""
+    private lateinit var url :String
+    private lateinit var data: Data
 
     private var index: Int = -1
     private var playbackProgressJob: Job? = null
@@ -39,11 +41,13 @@ class DetailRingtonesFragment :
 
         }
         CommonObject.positionDataRingtone.observe(viewLifecycleOwner) { position ->
-            binding.tvName.text = listRingtone[position].name
-            binding.tvTime.text = listRingtone[position].time
-            binding.seekBar.max = formatTimeToInt(listRingtone[position].time)
-            Log.d(TAG, "initData: " + formatTimeToInt(listRingtone[position].time))
-            url = listRingtone[position].link
+            data = listRingtone[position]
+            binding.tvName.text = data.name
+            binding.tvTime.text = data.time
+            CommonObject.checkFavoriteRingtoneUI(data, sharedPreferencesRingtones,resources,binding.btnFavorite)
+
+            binding.seekBar.max = formatTimeToInt(data.time)
+            url = data.link
             playMediaRingtone(url)
             index = position
             viewPlay()
@@ -79,6 +83,17 @@ class DetailRingtonesFragment :
 
         binding.btnClose.setOnClickListener {
             requireActivity().finish()
+        }
+
+        binding.btnFavorite.setOnClickListener {
+            if (!sharedPreferencesRingtones.isRingtoneExist(url)){
+                val listUrlPref = sharedPreferencesRingtones.getRingtones()
+                listUrlPref.add(data)
+                sharedPreferencesRingtones.saveRingtones(listUrlPref)
+                CommonObject.isFavoriteTrue(resources, binding.btnFavorite)
+            }else{
+                Toast.makeText(mContext, "Ringtone is duplicate!", Toast.LENGTH_SHORT).show()
+            }
         }
 
     }

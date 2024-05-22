@@ -1,5 +1,7 @@
 package com.project.tathanhson.wallpaperandringtons.model.livewallpaper
 
+import java.io.Serializable
+
 data class LiveWallpaperItem(
     val category_id: Int,
     val date_upload: String,
@@ -11,4 +13,4 @@ data class LiveWallpaperItem(
     val live: Int,
     val name: String,
     val premium: Int
-)
+) :Serializable

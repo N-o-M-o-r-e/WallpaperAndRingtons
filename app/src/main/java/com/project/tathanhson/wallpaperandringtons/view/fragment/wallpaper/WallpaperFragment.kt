@@ -40,8 +40,7 @@ class WallpaperFragment :
         //Quan sát dữ liệu khi call title category trả về để gán lên adapter
         CommonObject.listCategoryWallpaper.observe(viewLifecycleOwner, Observer { listTitle ->
             listTitle?.let {
-                adapterTitle =
-                    TitleWallpaperAdapter(mContext, viewModel, viewLifecycleOwner, listTitle)
+                adapterTitle = TitleWallpaperAdapter(mContext, viewModel, viewLifecycleOwner, listTitle)
                 binding.rcvTitle.adapter = adapterTitle
             }
         })
@@ -50,8 +49,7 @@ class WallpaperFragment :
         CommonObject.listWallpaper.observe(viewLifecycleOwner, Observer { wallpaperList ->
             wallpaperList?.let {
                 listWallpaper = wallpaperList
-                adapter =
-                    ListWallpaperAdapter(mContext, viewModel, viewLifecycleOwner, wallpaperList)
+                adapter = ListWallpaperAdapter(mContext, viewModel, viewLifecycleOwner, wallpaperList)
                 val layoutManager = GridLayoutManager(mContext, 3)
                 binding.rcvWallpaper.layoutManager = layoutManager
                 binding.rcvWallpaper.adapter = adapter

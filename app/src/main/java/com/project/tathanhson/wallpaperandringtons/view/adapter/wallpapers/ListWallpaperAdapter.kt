@@ -35,11 +35,15 @@ class ListWallpaperAdapter(
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
         val itemWallpaper = wallpaperList[position]
-
-        val imgPath = itemWallpaper.img_thumb
+        var imgPath = itemWallpaper.img_thumb
         Log.d("API", "onBindViewHolder: "+itemWallpaper.img_large)
 
-        CommonObject.loadPathImageToView(context, imgPath, holder.binding.imgWallpaper)
+        if (itemWallpaper.img_thumb == null){
+            imgPath = ""
+        }else{
+            CommonObject.loadPathImageToView(context, imgPath, holder.binding.imgWallpaper)
+        }
+
         holder.binding.tvFavorite.text = itemWallpaper.favorite.toString()
 
         holder.itemView.tag = position

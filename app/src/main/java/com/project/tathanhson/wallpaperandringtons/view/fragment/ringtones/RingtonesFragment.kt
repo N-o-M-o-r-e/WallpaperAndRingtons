@@ -3,7 +3,7 @@ package com.project.tathanhson.wallpaperandringtons.view.fragment.ringtones
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.project.tathanhson.mediaplayer.model.Ringtone
+import com.project.tathanhson.mediaplayer.model.Ringtones
 import com.project.tathanhson.wallpaperandringtons.CommonObject
 import com.project.tathanhson.wallpaperandringtons.OnMainCallback
 import com.project.tathanhson.wallpaperandringtons.R
@@ -17,7 +17,7 @@ import com.project.tathanhson.wallpaperandringtons.viewmodel.RingtonesVM
 class RingtonesFragment :
     BaseFragment<FragmentRingtonesBinding>(FragmentRingtonesBinding::inflate), OnMainCallback {
     lateinit var viewModel: RingtonesVM
-    private lateinit var mediaPlayerList: ArrayList<Ringtone>
+    private lateinit var mediaPlayerList: ArrayList<Ringtones>
     private lateinit var adapterTitle : CategoryRingtonesAdapter
     private lateinit var adapterListRingtones: ListRingtonesAdapter
     private var title = ""
@@ -36,7 +36,7 @@ class RingtonesFragment :
 
     override fun initView() {
         //RecyclerView Category
-        CommonObject.listCategorysRingtone.observe(viewLifecycleOwner, Observer { categories ->
+        CommonObject.listCategorysRingtones.observe(viewLifecycleOwner, Observer { categories ->
             //Createdefault value
             viewModel.getDataListForCategory(categories[0])
 

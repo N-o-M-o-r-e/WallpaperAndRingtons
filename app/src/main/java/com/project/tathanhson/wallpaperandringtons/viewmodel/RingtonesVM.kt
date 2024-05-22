@@ -6,15 +6,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.project.tathanhson.wallpaperandringtons.CommonObject
 import com.project.tathanhson.mediaplayer.model.Data
-import com.project.tathanhson.mediaplayer.model.Ringtone
+import com.project.tathanhson.mediaplayer.model.Ringtones
 import org.json.JSONArray
 
 class RingtonesVM : ViewModel() {
-    private val ringtones: ArrayList<Ringtone> = ArrayList()
+    private val ringtones: ArrayList<Ringtones> = ArrayList()
     private var isDataInitialized = false
     var positionDataRingtone = MutableLiveData<Int>()
 
-    fun readJSONToMediaPlayerList(resources: Resources, resourceId: Int): ArrayList<Ringtone> {
+    fun readJSONToMediaPlayerList(resources: Resources, resourceId: Int): ArrayList<Ringtones> {
         if (!isDataInitialized) {
             val jsonArray = readJSONFromResource(resources, resourceId)
             for (i in 0 until jsonArray.length()) {
@@ -30,9 +30,9 @@ class RingtonesVM : ViewModel() {
                     val time = dataObject.getString("time")
                     dataList.add(Data(link, name, size, time))
                 }
-                ringtones.add(Ringtone(category, dataList))
+                ringtones.add(Ringtones(category, dataList))
             }
-            CommonObject.listCategorysRingtone.value = getCategoryList()
+            CommonObject.listCategorysRingtones.value = getCategoryList()
             isDataInitialized = true
         }
         return ringtones

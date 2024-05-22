@@ -2,6 +2,7 @@ package com.project.tathanhson.wallpaperandringtons
 
 import android.app.Application
 
+
 class MyApplication : Application() {
 
     companion object {
@@ -11,6 +12,7 @@ class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
+
 
     }
 

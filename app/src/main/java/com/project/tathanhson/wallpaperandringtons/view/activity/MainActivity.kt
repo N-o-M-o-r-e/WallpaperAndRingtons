@@ -80,8 +80,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         }
 
         binding.btnFavorite.setOnClickListener {
-
-            showFragmemnt(DetailFavoriteFragment())
+            frgFavorite.viewModel = favoriteVM
+            showFragmemnt(MyFavoriteFragment())
         }
     }
 
