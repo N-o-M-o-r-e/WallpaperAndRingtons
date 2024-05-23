@@ -1,4 +1,4 @@
-package com.project.tathanhson.wallpaperandringtons.view.adapter.favorite
+package com.project.tathanhson.wallpaperandringtons.view.adapter.favorite.list
 
 import android.content.Context
 import android.view.LayoutInflater

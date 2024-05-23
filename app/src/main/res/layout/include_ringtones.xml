@@ -24,6 +24,7 @@
                 style="@style/title_bold_16"/>
 
             <TextView
+                android:id="@+id/tvSeeMore"
                 android:layout_width="wrap_content"
                 android:layout_height="22dp"
                 android:text="See more"

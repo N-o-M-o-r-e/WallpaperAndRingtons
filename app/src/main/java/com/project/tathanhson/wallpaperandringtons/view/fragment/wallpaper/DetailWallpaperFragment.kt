@@ -9,8 +9,10 @@ import com.example.wallpagerandringtons.viewmodel.WallpaperVM
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.project.tathanhson.wallpaperandringtons.CommonObject
 import com.project.tathanhson.wallpaperandringtons.MyApplication
+import com.project.tathanhson.wallpaperandringtons.MyPrefs.SharedPreferencesLiveWallpaper
 import com.project.tathanhson.wallpaperandringtons.databinding.BottomDialogBinding
 import com.project.tathanhson.wallpaperandringtons.databinding.FragmentDetailWallpaperBinding
+import com.project.tathanhson.wallpaperandringtons.model.wallpaper.WallpaperItem
 import com.project.tathanhson.wallpaperandringtons.view.activity.base.BaseFragment
 
 
@@ -18,10 +20,7 @@ class DetailWallpaperFragment : BaseFragment<FragmentDetailWallpaperBinding>(Fra
 
     lateinit var viewModel: WallpaperVM
     private lateinit var imagePath: String
-
-    private var countFavorite : Int =0
-    private var isClickFavotite: Boolean = false
-
+    private lateinit var itemWallpaper : WallpaperItem
 
     override fun initViewModel() {
         viewModel = ViewModelProvider(requireActivity()).get(WallpaperVM::class.java)
@@ -31,11 +30,9 @@ class DetailWallpaperFragment : BaseFragment<FragmentDetailWallpaperBinding>(Fra
     override fun initData() {
         CommonObject.itemWallpaper.observe(viewLifecycleOwner, Observer { item ->
             item?.let {
+                itemWallpaper = item
                 imagePath = it.img_large
                 CommonObject.loadPathImageToView(mContext, imagePath, binding.imgDetail)
-//                binding.btnFavorite.text = it.favorite.toString()
-//                binding.btnDownload.text = it.download.toString()
-//                countFavorite = it.favorite
 
                 CommonObject.checkFavoriteWallpaperUI(
                     it,
@@ -52,6 +49,7 @@ class DetailWallpaperFragment : BaseFragment<FragmentDetailWallpaperBinding>(Fra
     override fun initView() {
         binding.btnClose.setOnClickListener {
             requireActivity().finish()
+            CommonObject.itemWallpaper.value = null
         }
 
         binding.imgDetail.setOnClickListener {
@@ -66,32 +64,21 @@ class DetailWallpaperFragment : BaseFragment<FragmentDetailWallpaperBinding>(Fra
         }
 
         binding.btnFavorite.setOnClickListener {
+            val id_wallpaper = itemWallpaper.id
+            if (!sharedPreferencesWallpaper.isIdExist(id_wallpaper)) {
+                // Update favorite to API
+                viewModel.postUpdateFavorite(id_wallpaper)
+                val currentWallpapers = sharedPreferencesWallpaper.getWallpapers()
+                currentWallpapers.add(id_wallpaper)
+                sharedPreferencesWallpaper.saveWallpapers(currentWallpapers)
+                CommonObject.isFavoriteTrue(resources, binding.btnFavorite)
 
-//            countFavorite++
-            CommonObject.itemWallpaper.observe(viewLifecycleOwner) { item ->
-                item?.let {
-                    val id_wallpaper = item.id
-
-                    if (!sharedPreferencesWallpaper.isIdExist(id_wallpaper)) {
-                        // Update favorite to API
-                        viewModel.postUpdateFavorite(id_wallpaper)
-//                        binding.btnFavorite.text = countFavorite.toString()
-//                        CommonObject.listWallpaperFav.add(it)
-                        // Lưu ID vào SharedPreferences
-
-                        val currentWallpapers = sharedPreferencesWallpaper.getWallpapers()
-                        currentWallpapers.add(id_wallpaper)
-                        sharedPreferencesWallpaper.saveWallpapers(currentWallpapers)
-                        CommonObject.isFavoriteTrue(resources, binding.btnFavorite)
-
-                    } else {
-                        // ID đã tồn tại, có thể thông báo hoặc thực hiện xử lý khác tùy thuộc vào yêu cầu của ứng dụng
-                        Log.e("AAAAAAAAA", "ID đã tồn tại trong SharedPreferences")
-                    }
-                }
+            } else {
+                // Xóa wallpaper khỏi danh sách yêu thích
+                sharedPreferencesWallpaper.removeWallpaper(id_wallpaper)
+                CommonObject.isFavoriteFalse(resources, binding.btnFavorite)
+                Log.e("AAAAAAAAA", "ID đã tồn tại trong SharedPreferences và đã bị xóa")
             }
-
-
         }
     }
 

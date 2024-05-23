@@ -1,10 +1,11 @@
 package com.project.tathanhson.wallpaperandringtons.view.activity
 
 import androidx.fragment.app.Fragment
+import com.project.tathanhson.wallpaperandringtons.CommonObject
 import com.project.tathanhson.wallpaperandringtons.R
 import com.project.tathanhson.wallpaperandringtons.databinding.ActivityDetailBinding
 import com.project.tathanhson.wallpaperandringtons.view.activity.base.BaseActivity
-import com.project.tathanhson.wallpaperandringtons.view.fragment.favorite.DetailFavoriteFragment
+import com.project.tathanhson.wallpaperandringtons.view.fragment.favorite.detail.DetailFavoriteFragment
 import com.project.tathanhson.wallpaperandringtons.view.fragment.livewallpaper.DetailLiveWallpaperFragment
 import com.project.tathanhson.wallpaperandringtons.view.fragment.ringtones.DetailRingtonesFragment
 import com.project.tathanhson.wallpaperandringtons.view.fragment.wallpaper.DetailWallpaperFragment
@@ -28,7 +29,6 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
     }
 
     override fun initView() {
-
 
     }
 

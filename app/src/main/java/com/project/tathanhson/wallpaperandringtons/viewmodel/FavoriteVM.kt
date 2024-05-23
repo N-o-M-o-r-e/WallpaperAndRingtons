@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.example.wallpagerandringtons.model.repository.Api
 import com.example.wallpagerandringtons.model.repository.RetrofitHelper
 import com.project.tathanhson.mediaplayer.model.Data
+import com.project.tathanhson.wallpaperandringtons.CommonObject
 import com.project.tathanhson.wallpaperandringtons.MyPrefs.SharedPreferencesLiveWallpaper
 import com.project.tathanhson.wallpaperandringtons.MyPrefs.SharedPreferencesRingtones
 import com.project.tathanhson.wallpaperandringtons.MyPrefs.SharedPreferencesWallpaper
@@ -25,14 +26,7 @@ class FavoriteVM : ViewModel() {
     val sharedPreferencesRingtones = SharedPreferencesRingtones()
     val sharedPreferencesLiveWallpaper = SharedPreferencesLiveWallpaper()
 
-    private val _favoriteWallpapers = MutableLiveData<ArrayList<WallpaperItem>>()
-    val favoriteWallpapers: LiveData<ArrayList<WallpaperItem>> get() = _favoriteWallpapers
 
-    private val _favoriteRingtones = MutableLiveData<ArrayList<Data>>()
-    val favoriteRingtones: LiveData<ArrayList<Data>> get() = _favoriteRingtones
-
-    private val _favoriteLiveWallpapers = MutableLiveData<ArrayList<LiveWallpaperItem>>()
-    val favoriteLiveWallpapers: LiveData<ArrayList<LiveWallpaperItem>> get() = _favoriteLiveWallpapers
 
     @SuppressLint("LogConditional")
     fun getListFavWallpaperIds(): List<Int> {
@@ -96,7 +90,7 @@ class FavoriteVM : ViewModel() {
                     wallpapers.add(it)
                 }
                 if (wallpapers.size == wallpaperIds.size) {
-                    _favoriteWallpapers.postValue(wallpapers)
+                    CommonObject._favoriteWallpapers.postValue(wallpapers)
                 }
             }
         }
@@ -105,7 +99,7 @@ class FavoriteVM : ViewModel() {
     fun fetchAllFavoriteRingtones() {
         val ringtoneUrl = sharedPreferencesRingtones.getRingtones()
         Log.d("AAAAAAAAAA", "getListFavRingtoneUrl: $ringtoneUrl")
-        _favoriteRingtones.postValue(ringtoneUrl)
+        CommonObject._favoriteRingtones.postValue(ringtoneUrl)
     }
 
     fun fetchAllFavLiveWallpapers() {
@@ -118,7 +112,7 @@ class FavoriteVM : ViewModel() {
                     liveWallpapers.add(it)
                 }
                 if (liveWallpapers.size == liveWallpaperIds.size) {
-                    _favoriteLiveWallpapers.postValue(liveWallpapers)
+                    CommonObject._favoriteLiveWallpapers.postValue(liveWallpapers)
                 }
             }
         }

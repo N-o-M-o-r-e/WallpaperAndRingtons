@@ -41,16 +41,19 @@ class DetailRingtonesFragment :
 
         }
         CommonObject.positionDataRingtone.observe(viewLifecycleOwner) { position ->
-            data = listRingtone[position]
-            binding.tvName.text = data.name
-            binding.tvTime.text = data.time
-            CommonObject.checkFavoriteRingtoneUI(data, sharedPreferencesRingtones,resources,binding.btnFavorite)
+            position?.let {
+                data = listRingtone[position]
+                binding.tvName.text = data.name
+                binding.tvTime.text = data.time
+                CommonObject.checkFavoriteRingtoneUI(data, sharedPreferencesRingtones,resources,binding.btnFavorite)
 
-            binding.seekBar.max = formatTimeToInt(data.time)
-            url = data.link
-            playMediaRingtone(url)
-            index = position
-            viewPlay()
+                binding.seekBar.max = formatTimeToInt(data.time)
+                url = data.link
+                playMediaRingtone(url)
+                index = position
+                viewPlay()
+            }
+
         }
 
     }
@@ -83,6 +86,7 @@ class DetailRingtonesFragment :
 
         binding.btnClose.setOnClickListener {
             requireActivity().finish()
+            CommonObject.positionDataRingtone.value = null
         }
 
         binding.btnFavorite.setOnClickListener {
@@ -92,7 +96,9 @@ class DetailRingtonesFragment :
                 sharedPreferencesRingtones.saveRingtones(listUrlPref)
                 CommonObject.isFavoriteTrue(resources, binding.btnFavorite)
             }else{
-                Toast.makeText(mContext, "Ringtone is duplicate!", Toast.LENGTH_SHORT).show()
+                sharedPreferencesRingtones.removeRingtone(data.link)
+                CommonObject.isFavoriteFalse(resources, binding.btnFavorite)
+                Toast.makeText(mContext, "Ringtone removed from favorites!", Toast.LENGTH_SHORT).show()
             }
         }
 

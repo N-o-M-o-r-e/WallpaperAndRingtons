@@ -34,5 +34,12 @@ class SharedPreferencesWallpaper {
         val savedIds = getWallpapers()
         return savedIds.contains(id)
     }
+
+    // Xóa một ID khỏi danh sách và lưu lại
+    fun removeWallpaper(id: Int) {
+        val savedIds = getWallpapers()
+        val updatedIds = savedIds.filter { it != id }
+        saveWallpapers(ArrayList(updatedIds))
+    }
 }
 

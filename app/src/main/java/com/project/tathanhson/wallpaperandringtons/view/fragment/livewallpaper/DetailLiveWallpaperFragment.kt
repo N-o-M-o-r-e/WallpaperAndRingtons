@@ -29,12 +29,10 @@ class DetailLiveWallpaperFragment :
     override fun initData() {
         //Observer Item LiveWallpaper
         CommonObject.itemLiveWallpaper.observe(viewLifecycleOwner) { itemLiveWallpaper ->
-            item = itemLiveWallpaper
             itemLiveWallpaper?.let {
+                item = itemLiveWallpaper
                 CommonObject.loadPathImageToView(mContext, item.img_large, binding.imgDetail)
-
                 countFavorite = item.favorite
-
                 CommonObject.checkFavoriteLiveWallpaperUI(
                     item,
                     sharedPreferencesLiveWallpaper,
@@ -48,6 +46,7 @@ class DetailLiveWallpaperFragment :
     override fun initView() {
         binding.btnClose.setOnClickListener {
             requireActivity().finish()
+            CommonObject.itemLiveWallpaper.value = null
         }
 
         binding.imgDetail.setOnClickListener {
@@ -66,6 +65,7 @@ class DetailLiveWallpaperFragment :
             if (!sharedPreferencesLiveWallpaper.isIdExist(id_live_wallpaper)){
                 //update favorite to API
                 viewModel.postUpdateFavorite(item.id)
+
                 val currentWallpapers = sharedPreferencesLiveWallpaper.getWallpapers()
                 currentWallpapers.add(id_live_wallpaper)
 
@@ -73,6 +73,9 @@ class DetailLiveWallpaperFragment :
 
                 CommonObject.isFavoriteTrue(resources, binding.btnFavorite)
             }else{
+                // Remove ID if it already exists
+                sharedPreferencesLiveWallpaper.removeWallpaper(id_live_wallpaper)
+                CommonObject.isFavoriteFalse(resources, binding.btnFavorite)
                 Toast.makeText(mContext, "Live Wallpaper is duplicate!", Toast.LENGTH_SHORT).show()
             }
 

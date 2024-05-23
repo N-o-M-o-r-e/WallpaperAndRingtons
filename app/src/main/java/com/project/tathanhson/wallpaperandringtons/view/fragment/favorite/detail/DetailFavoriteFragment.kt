@@ -1,4 +1,4 @@
-package com.project.tathanhson.wallpaperandringtons.view.fragment.favorite
+package com.project.tathanhson.wallpaperandringtons.view.fragment.favorite.detail
 
 import com.project.tathanhson.wallpaperandringtons.databinding.FragmentDetailFavoriteBinding
 import com.project.tathanhson.wallpaperandringtons.view.activity.base.BaseFragment

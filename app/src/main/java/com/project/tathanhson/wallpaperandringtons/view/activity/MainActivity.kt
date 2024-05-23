@@ -9,9 +9,7 @@ import com.project.tathanhson.wallpaperandringtons.CommonObject
 import com.project.tathanhson.wallpaperandringtons.R
 import com.project.tathanhson.wallpaperandringtons.databinding.ActivityMainBinding
 import com.project.tathanhson.wallpaperandringtons.view.activity.base.BaseActivity
-import com.project.tathanhson.wallpaperandringtons.view.fragment.favorite.DetailFavoriteFragment
-import com.project.tathanhson.wallpaperandringtons.view.fragment.favorite.MyFavoriteFragment
-import com.project.tathanhson.wallpaperandringtons.view.fragment.livewallpaper.DetailLiveWallpaperFragment
+import com.project.tathanhson.wallpaperandringtons.view.fragment.favorite.list.MyFavoriteFragment
 import com.project.tathanhson.wallpaperandringtons.view.fragment.livewallpaper.LiveWallpapersFragment
 import com.project.tathanhson.wallpaperandringtons.view.fragment.ringtones.RingtonesFragment
 import com.project.tathanhson.wallpaperandringtons.view.fragment.wallpaper.WallpaperFragment

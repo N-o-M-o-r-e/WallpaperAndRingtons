@@ -93,9 +93,11 @@ class ListRingtonesAdapter(
         }
 
         CommonObject.categoryRingtone.observe(lifecycleOwner , Observer { titleSelect->
-            if (!titleSelect.equals(title)){
-                stopMediaRingtone()
-                viewPause(holder)
+            if (title != ""){
+                if (!titleSelect.equals(title)){
+                    stopMediaRingtone()
+                    viewPause(holder)
+                }
             }
         })
     }

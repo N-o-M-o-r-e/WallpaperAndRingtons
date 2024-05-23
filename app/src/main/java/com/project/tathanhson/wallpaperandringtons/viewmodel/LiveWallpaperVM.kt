@@ -40,7 +40,6 @@ class LiveWallpaperVM : ViewModel() {
         val favoriteWallpaper = RetrofitHelper.getInstance().create(Api::class.java)
         favoriteWallpaper.postUpdateFavorite(wallpaperId).enqueue(object : Callback<WallpaperItem> {
             override fun onResponse(call: Call<WallpaperItem>, response: Response<WallpaperItem>) {
-//                Log.d("AAAAAAAAAAAAA", "onResponse: Update success: " + response.body())
                 response.body()
             }
             override fun onFailure(call: Call<WallpaperItem>, t: Throwable) {

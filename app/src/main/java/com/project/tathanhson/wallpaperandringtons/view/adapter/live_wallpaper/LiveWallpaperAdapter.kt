@@ -8,14 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.project.tathanhson.wallpaperandringtons.CommonObject
 import com.project.tathanhson.wallpaperandringtons.databinding.ItemWallpaperBinding
 import com.project.tathanhson.wallpaperandringtons.model.livewallpaper.LiveWallpaperItem
-import com.project.tathanhson.wallpaperandringtons.model.livewallpaper.LiveWallpapers
 import com.project.tathanhson.wallpaperandringtons.viewmodel.LiveWallpaperVM
 
 class LiveWallpaperAdapter(
     private val context: Context,
     private val viewModel: LiveWallpaperVM,
     private val lifecycleOwner: LifecycleOwner,
-    private val liveWallpapers: LiveWallpapers
+    private val liveWallpapers: ArrayList<LiveWallpaperItem>
 ) : RecyclerView.Adapter<LiveWallpaperAdapter.ItemHolder>() {
 
     private var itemSelect: LiveWallpaperItem? = null

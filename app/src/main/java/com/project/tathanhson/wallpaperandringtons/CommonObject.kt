@@ -8,6 +8,7 @@ import android.graphics.Bitmap
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -49,7 +50,16 @@ object CommonObject {
     var positionLiveWallpaper = MutableLiveData<Int>()              // position item in LiveWallpapers
     var itemLiveWallpaper = MutableLiveData<LiveWallpaperItem>()    // position item in LiveWallpapers
 
-//    var listWallpaperFav = Wallpapers()
+    //favorite
+
+    val _favoriteWallpapers = MutableLiveData<ArrayList<WallpaperItem>>()
+    val favoriteWallpapers: LiveData<ArrayList<WallpaperItem>> get() = _favoriteWallpapers
+
+    val _favoriteRingtones = MutableLiveData<ArrayList<Data>>()
+    val favoriteRingtones: LiveData<ArrayList<Data>> get() = _favoriteRingtones
+
+    val _favoriteLiveWallpapers = MutableLiveData<ArrayList<LiveWallpaperItem>>()
+    val favoriteLiveWallpapers: LiveData<ArrayList<LiveWallpaperItem>> get() = _favoriteLiveWallpapers
 
 
     fun loadPathImageToView(context: Context, pathImage: String, imgWallpaper: ImageView) {

@@ -40,4 +40,11 @@ class SharedPreferencesRingtones {
         val savedRingtones = getRingtones()
         return savedRingtones.any { it.link == link }
     }
+
+    // Xóa một Ringtone khỏi danh sách và lưu lại
+    fun removeRingtone(link: String) {
+        val savedRingtones = getRingtones()
+        val updatedRingtones = savedRingtones.filter { it.link != link }
+        saveRingtones(ArrayList(updatedRingtones))
+    }
 }
