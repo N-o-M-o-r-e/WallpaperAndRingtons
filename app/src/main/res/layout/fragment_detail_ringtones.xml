@@ -16,6 +16,7 @@
             android:id="@+id/btnClose"
             android:layout_width="52dp"
             android:layout_height="52dp"
+            android:importantForAccessibility="no"
             android:padding="16dp"
             android:layout_marginTop="12dp"
             android:src="@drawable/ic_close"
@@ -27,7 +28,7 @@
             style="@style/title_bold_16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Take care of you"
+            android:text="@string/test"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,6 +48,7 @@
                 android:layout_width="160dp"
                 android:layout_height="160dp"
                 android:background="@drawable/background_ringtone_blue_circle"
+                android:importantForAccessibility="no"
                 android:padding="48dp"
                 android:visibility="gone"
                 android:src="@drawable/img_play"
@@ -56,6 +58,7 @@
                 android:layout_width="160dp"
                 android:layout_height="160dp"
                 android:background="@drawable/background_ringtone_blue_circle"
+                android:importantForAccessibility="no"
                 android:padding="60dp"
                 android:visibility="visible"
                 android:src="@drawable/img_pause"
@@ -68,6 +71,7 @@
             android:id="@+id/btnBack"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:importantForAccessibility="no"
             android:padding="24dp"
             android:layout_marginEnd="-20dp"
             android:src="@drawable/ic_back_voice"
@@ -81,6 +85,7 @@
             android:id="@+id/btnNext"
             android:layout_width="80dp"
             android:layout_height="80dp"
+            android:importantForAccessibility="no"
             android:padding="24dp"
             android:layout_marginStart="-20dp"
             android:src="@drawable/ic_next_voice"
@@ -109,7 +114,7 @@
             style="@style/title_regular_12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="00:00"
+            android:text="@string/start_time"
             android:layout_marginHorizontal="20dp"
             app:layout_constraintStart_toStartOf="@+id/seekBar"
             app:layout_constraintTop_toBottomOf="@+id/seekBar" />
@@ -119,7 +124,7 @@
             style="@style/title_regular_12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="00:10"
+            android:text="@string/end_time"
             app:layout_constraintEnd_toEndOf="@+id/seekBar"
             android:layout_marginHorizontal="20dp"
             app:layout_constraintTop_toBottomOf="@+id/seekBar" />
@@ -140,7 +145,7 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/nunito_semibold"
                 android:gravity="center"
-                android:text="Set as"
+                android:text="@string/set_as"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -161,8 +166,9 @@
                     android:gravity="center"
                     style="@style/notito_semibold_16sp"
                     android:layout_height="wrap_content"
-                    android:text="Alarm"
-                    app:drawableTopCompat="@drawable/ic_alarm" />
+                    android:text="@string/alarm"
+                    app:drawableTopCompat="@drawable/ic_alarm"
+                    tools:ignore="NestedWeights" />
 
                 <TextView
                     android:id="@+id/btnNotification"
@@ -171,7 +177,7 @@
                     android:gravity="center"
                     style="@style/notito_semibold_16sp"
                     android:layout_height="wrap_content"
-                    android:text="Notification"
+                    android:text="@string/notification"
                     app:drawableTopCompat="@drawable/ic_notification" />
 
                 <TextView
@@ -181,7 +187,7 @@
                     android:gravity="center"
                     style="@style/notito_semibold_16sp"
                     android:layout_height="wrap_content"
-                    android:text="Alarm"
+                    android:text="@string/ringtones"
                     app:drawableTopCompat="@drawable/ic_ringtone" />
             </LinearLayout>
 
@@ -208,10 +214,9 @@
                 android:textSize="14sp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Share"
+                android:text="@string/share"
                 android:textColor="@color/white"
-                android:drawableTop="@drawable/ic_share"
-                />
+                app:drawableTopCompat="@drawable/ic_share" />
 
             <TextView
                 android:id="@+id/btnDownload"
@@ -221,9 +226,9 @@
                 android:textSize="14sp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Download"
+                android:text="@string/download"
                 android:textColor="@color/white"
-                android:drawableTop="@drawable/ic_download" />
+                app:drawableTopCompat="@drawable/ic_download" />
 
             <TextView
                 android:id="@+id/btnFavorite"
@@ -233,9 +238,9 @@
                 android:textSize="14sp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Favorite"
+                android:text="@string/favorite"
                 android:textColor="@color/white"
-                android:drawableTop="@drawable/ic_favorite_off"/>
+                app:drawableTopCompat="@drawable/ic_favorite_off" />
         </LinearLayout>
 
         <!--    <View-->

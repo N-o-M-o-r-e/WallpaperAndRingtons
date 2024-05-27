@@ -43,7 +43,10 @@ object CommonObject {
     var categoryRingtone = MutableLiveData<String>()                  // category in list
 
     var listDataRingtone = MutableLiveData<ArrayList<Data>>()   // listData
-    var positionDataRingtone = MutableLiveData<Int>()           // position item in listData
+    var positionDataRingtone = MutableLiveData<Int>() // position item in listData
+
+    var itemRingtonesFav = MutableLiveData<Data>()
+    var positionRingtoneFav = MutableLiveData<Int>() // position item in listData favorite
 
     //livedata livewallpaper
     var listLiveWallpapers = MutableLiveData<LiveWallpapers>()      //list Live Wallpaper
@@ -61,6 +64,8 @@ object CommonObject {
     val _favoriteLiveWallpapers = MutableLiveData<ArrayList<LiveWallpaperItem>>()
     val favoriteLiveWallpapers: LiveData<ArrayList<LiveWallpaperItem>> get() = _favoriteLiveWallpapers
 
+    //path livewallpaper
+    var URL_LIVE_WALLPAPER = ""
 
     fun loadPathImageToView(context: Context, pathImage: String, imgWallpaper: ImageView) {
         if (pathImage == null){

@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.project.tathanhson.wallpaperandringtons.CommonObject
+import com.project.tathanhson.wallpaperandringtons.databinding.ItemLiveWallpaperBinding
 import com.project.tathanhson.wallpaperandringtons.databinding.ItemWallpaperBinding
 import com.project.tathanhson.wallpaperandringtons.model.livewallpaper.LiveWallpaperItem
 import com.project.tathanhson.wallpaperandringtons.viewmodel.LiveWallpaperVM
@@ -20,7 +21,7 @@ class LiveWallpaperAdapter(
     private var itemSelect: LiveWallpaperItem? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
         val binding =
-            ItemWallpaperBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemLiveWallpaperBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ItemHolder(binding)
     }
 
@@ -34,11 +35,19 @@ class LiveWallpaperAdapter(
 
         CommonObject.loadPathImageToView(context, imgPath, holder.binding.imgWallpaper)
 
+//        holder.binding.imgWallpaper.setVideoPath(imgPath)
+//        holder.binding.imgWallpaper.start()
+//        holder.binding.imgWallpaper.setOnCompletionListener { mediaPlayer ->
+//            mediaPlayer?.let {
+//                it.seekTo(0)
+//                it.start()
+//            }
+//        }
         holder.binding.tvFavorite.text = itemLiveWallpaper.favorite.toString()
         holder.itemView.tag = itemLiveWallpaper
     }
 
-    inner class ItemHolder(val binding: ItemWallpaperBinding) :
+    inner class ItemHolder(val binding: ItemLiveWallpaperBinding) :
         RecyclerView.ViewHolder(binding.root) {
         init {
             itemView.setOnClickListener {

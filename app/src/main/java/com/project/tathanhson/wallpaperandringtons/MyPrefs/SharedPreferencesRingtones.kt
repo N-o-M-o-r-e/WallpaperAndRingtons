@@ -2,9 +2,9 @@ package com.project.tathanhson.wallpaperandringtons.MyPrefs
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import com.google.gson.Gson
 import com.project.tathanhson.mediaplayer.model.Data
-import com.project.tathanhson.mediaplayer.model.Ringtones
 import com.project.tathanhson.wallpaperandringtons.MyApplication
 import org.json.JSONArray
 
@@ -15,7 +15,6 @@ class SharedPreferencesRingtones {
 
     private val gson = Gson()
 
-    // Lưu danh sách Data vào SharedPreferences
     fun saveRingtones(ringtones: ArrayList<Data>) {
         val jsonArray = JSONArray()
         ringtones.forEach { jsonArray.put(gson.toJson(it)) }
@@ -23,7 +22,18 @@ class SharedPreferencesRingtones {
         editor.apply()
     }
 
-    // Lấy danh sách Data từ SharedPreferences
+    fun removeRingtone(link: String) {
+        val savedRingtones = getRingtones()
+        val updatedRingtones = savedRingtones.filter { it.link != link }
+        saveRingtones(ArrayList(updatedRingtones))
+    }
+
+    fun isRingtoneExist(link: String): Boolean {
+        val savedRingtones = getRingtones()
+        return savedRingtones.any { it.link == link }
+    }
+
+
     fun getRingtones(): ArrayList<Data> {
         val jsonString = sharedPreferences.getString("ringtones", "[]") ?: "[]"
         val jsonArray = JSONArray(jsonString)
@@ -32,19 +42,9 @@ class SharedPreferencesRingtones {
             val ringtoneItem = gson.fromJson(jsonArray.getString(i), Data::class.java)
             list.add(ringtoneItem)
         }
+        Log.i("BBBBBBBB", "shaf ring: " + list)
         return list
     }
 
-    // Kiểm tra xem một Ringtone đã tồn tại trong danh sách hay chưa
-    fun isRingtoneExist(link: String): Boolean {
-        val savedRingtones = getRingtones()
-        return savedRingtones.any { it.link == link }
-    }
 
-    // Xóa một Ringtone khỏi danh sách và lưu lại
-    fun removeRingtone(link: String) {
-        val savedRingtones = getRingtones()
-        val updatedRingtones = savedRingtones.filter { it.link != link }
-        saveRingtones(ArrayList(updatedRingtones))
-    }
 }

@@ -1,6 +1,7 @@
 package com.project.tathanhson.wallpaperandringtons.view.activity
 
 import android.content.Intent
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -12,28 +13,40 @@ import com.project.tathanhson.wallpaperandringtons.CommonObject
 import com.project.tathanhson.wallpaperandringtons.R
 import com.project.tathanhson.wallpaperandringtons.databinding.ActivityListFavoriteBinding
 import com.project.tathanhson.wallpaperandringtons.model.livewallpaper.LiveWallpapers
-import com.project.tathanhson.wallpaperandringtons.model.wallpaper.Wallpapers
+import com.project.tathanhson.wallpaperandringtons.model.wallpaper.WallpaperItem
 import com.project.tathanhson.wallpaperandringtons.view.activity.base.BaseActivity
+import com.project.tathanhson.wallpaperandringtons.view.adapter.favorite.detail.FavRingtoneListAdapter
 import com.project.tathanhson.wallpaperandringtons.view.adapter.live_wallpaper.LiveWallpaperAdapter
-import com.project.tathanhson.wallpaperandringtons.view.adapter.ringtones.ListRingtonesAdapter
-import com.project.tathanhson.wallpaperandringtons.view.fragment.favorite.list.MyFavoriteFragment
+import com.project.tathanhson.wallpaperandringtons.view.fragment.favorite.FavoriteFragment
+import com.project.tathanhson.wallpaperandringtons.viewmodel.FavoriteVM
 import com.project.tathanhson.wallpaperandringtons.viewmodel.LiveWallpaperVM
 import com.project.tathanhson.wallpaperandringtons.viewmodel.RingtonesVM
 
-class ListFavoriteActivity :
+class FavoriteActivity :
     BaseActivity<ActivityListFavoriteBinding>(ActivityListFavoriteBinding::inflate) {
     private var index = 0
+
+    lateinit var viewModel: FavoriteVM
 
     lateinit var wallpaperVM: WallpaperVM
     lateinit var ringtonesVM: RingtonesVM
     lateinit var liveWallpapersVM : LiveWallpaperVM
 
     private var adapterWallpapers: ListWallpaperAdapter? = null
-    private var adapterRingtones: ListRingtonesAdapter? = null
+    private var adapterRingtones: FavRingtoneListAdapter? = null
     private var adapterLiveWallpapers: LiveWallpaperAdapter? = null
 
-    private var listWallpaper: Wallpapers? = null
+    private var listWallpaper: ArrayList<WallpaperItem>? = null
+
     private var listLiveWallpaper : LiveWallpapers? = null
+
+    override fun onStart() {
+        super.onStart()
+        viewModel = ViewModelProvider(this)[FavoriteVM::class.java]
+        viewModel.fetchAllFavWallpapers()
+        viewModel.fetchAllFavoriteRingtones()
+        viewModel.fetchAllFavLiveWallpapers()
+    }
 
     override fun initViewModel() {
         wallpaperVM = ViewModelProvider(this)[WallpaperVM::class.java]
@@ -62,22 +75,34 @@ class ListFavoriteActivity :
         }
 
 
-        val key = intent.getStringExtra(MyFavoriteFragment.KEY_EXTRA_FRG)
+        val key = intent.getStringExtra(FavoriteFragment.KEY_EXTRA_FRG)
 
         when (key) {
-            MyFavoriteFragment.KEY_WALLPAPER_FAV -> {
+            FavoriteFragment.KEY_WALLPAPER_FAV -> {
                 Toast.makeText(this, "Wallpaper", Toast.LENGTH_SHORT).show()
                 index = 1
             }
 
-            MyFavoriteFragment.KEY_RINGTONE_FAV -> {
+            FavoriteFragment.KEY_RINGTONE_FAV -> {
                 Toast.makeText(this, "Ringtones", Toast.LENGTH_SHORT).show()
                 index = 2
             }
 
-            MyFavoriteFragment.KEY_LIVE_WALLPAPER_FAV -> {
+            FavoriteFragment.KEY_LIVE_WALLPAPER_FAV -> {
                 Toast.makeText(this, "Live Wallpaper", Toast.LENGTH_SHORT).show()
                 index = 3
+            }
+        }
+
+        listenerData()
+    }
+
+    private fun listenerData() {
+        CommonObject.positionRingtoneFav.observe(this){ itemRingtone ->
+            itemRingtone?.let {
+                intent = Intent(this, DetailActivity::class.java)
+                intent.putExtra(FavoriteActivity.keyFav, KEY_RINGTONE)
+                startActivity(intent)
             }
         }
     }
@@ -111,7 +136,8 @@ class ListFavoriteActivity :
 
         CommonObject.favoriteWallpapers.observe(this) { wallpaperList ->
             wallpaperList?.let {
-                listWallpaper = wallpaperList as Wallpapers?
+                Log.d("CCCCCCCC", "viewWallpaper: $wallpaperList")
+                listWallpaper = wallpaperList
                 adapterWallpapers = ListWallpaperAdapter(this, wallpaperVM, this, wallpaperList)
                 val layoutManager = GridLayoutManager(this, 3)
                 binding.recyclerView.layoutManager = layoutManager
@@ -119,6 +145,7 @@ class ListFavoriteActivity :
             }
         }
     }
+
 
     fun goToDetailActivity(key: String) {
         intent = Intent(this, DetailActivity::class.java)
@@ -131,8 +158,9 @@ class ListFavoriteActivity :
 
         CommonObject.favoriteRingtones.observe(this) { listRingtoneData ->
             binding.recyclerView.layoutManager = LinearLayoutManager(this)
-            adapterRingtones = ListRingtonesAdapter(this, ringtonesVM, this, listRingtoneData, "")
+            adapterRingtones = FavRingtoneListAdapter(this, ringtonesVM, this, ArrayList(), "")
             binding.recyclerView.adapter = adapterRingtones
+            adapterRingtones!!.updateRingtones(listRingtoneData)
         }
     }
 
@@ -140,6 +168,7 @@ class ListFavoriteActivity :
         binding.title.text = getString(R.string.live_wallpapers)
 
         CommonObject.favoriteLiveWallpapers.observe(this) { liveWallpapers ->
+            Log.e("CCCCCCCCCCCCCC", "viewLiveWallpaper: "+liveWallpapers )
             liveWallpapers?.let {
                 adapterLiveWallpapers = LiveWallpaperAdapter(this, liveWallpapersVM, this, it )
                 val layoutManager = GridLayoutManager(this, 3)
@@ -153,6 +182,11 @@ class ListFavoriteActivity :
     override fun onBackPressed() {
         super.onBackPressed()
         onBackPressedDispatcher.onBackPressed()
+        finish()
     }
 
+    companion object{
+        const val keyFav = "KEY_FAV"
+        const val KEY_RINGTONE = "KEY_RINGTONE"
+    }
 }

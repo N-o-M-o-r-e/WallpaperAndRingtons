@@ -28,6 +28,14 @@ class FavLiveWallpaperAdapter(
             liveWallpaper.img_large,
             holder.binding.imgWallpaper
         )
+//        holder.binding.imgWallpaper.setVideoPath(liveWallpaper.img_large)
+//        holder.binding.imgWallpaper.start()
+//        holder.binding.imgWallpaper.setOnCompletionListener { mediaPlayer ->
+//            mediaPlayer?.let {
+//                it.seekTo(0)
+//                it.start()
+//            }
+//        }
         holder.binding.tvFavorite.text = liveWallpaper.favorite.toString()
     }
 

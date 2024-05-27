@@ -19,43 +19,48 @@ import com.project.tathanhson.wallpaperandringtons.model.wallpaper.Wallpapers
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
+@SuppressLint("LogConditional")
 class FavoriteVM : ViewModel() {
 
     val sharedPreferencesWallpaper = SharedPreferencesWallpaper()
     val sharedPreferencesRingtones = SharedPreferencesRingtones()
     val sharedPreferencesLiveWallpaper = SharedPreferencesLiveWallpaper()
 
-
-
-    @SuppressLint("LogConditional")
-    fun getListFavWallpaperIds(): List<Int> {
+    fun fetchAllFavWallpapers() {
         val wallpaperIds = sharedPreferencesWallpaper.getWallpapers()
-        Log.d("AAAAAAAAAA", "getListFavWallpaperIds: $wallpaperIds")
-        return wallpaperIds
+        val wallpapers = Wallpapers()
+
+        for (id in wallpaperIds) {
+            getWallpaperFav(id) { wallpaperItem ->
+                wallpaperItem?.let {
+                    wallpapers.add(it)
+                }
+                if (wallpapers.size == wallpaperIds.size) {
+                    CommonObject._favoriteWallpapers.postValue(wallpapers)
+                }
+            }
+        }
     }
 
-    fun getListFavLiveWallpaperIds(): List<Int> {
+    fun fetchAllFavLiveWallpapers() {
         val liveWallpaperIds = sharedPreferencesLiveWallpaper.getWallpapers()
-        Log.d("AAAAAAAAAA", "getListFavLiveWallpaperIds: $liveWallpaperIds")
-        return liveWallpaperIds
+        val liveWallpapers = ArrayList<LiveWallpaperItem>()
+
+        for (id in liveWallpaperIds) {
+            getLiveWallpaperFav(id) { wallpaperItem ->
+                wallpaperItem?.let {
+                    liveWallpapers.add(it)
+                }
+                if (liveWallpapers.size == liveWallpaperIds.size) {
+                    CommonObject._favoriteLiveWallpapers.postValue(liveWallpapers)
+                }
+            }
+        }
     }
 
-    private fun getWallpaperFav(id_wallpaper: Int, onResult: (WallpaperItem?) -> Unit) {
-        val favWallpaper = RetrofitHelper.getInstance().create(Api::class.java)
-
-        favWallpaper.getWallpaperById(id_wallpaper).enqueue(object : Callback<WallpaperItem> {
-            override fun onResponse(call: Call<WallpaperItem>, response: Response<WallpaperItem>) {
-                val favWallpaper = response.body()
-                Log.e("AAAAAAAAA", "Wallpaper By ID: $favWallpaper")
-                onResult(favWallpaper)
-            }
-
-            override fun onFailure(call: Call<WallpaperItem>, t: Throwable) {
-                Log.e("AAAAAAAAA", "onFailure: ${t.message}")
-                onResult(null)
-            }
-        })
+    fun fetchAllFavoriteRingtones() {
+        val ringtoneUrl = sharedPreferencesRingtones.getRingtones()
+        CommonObject._favoriteRingtones.postValue(ringtoneUrl)
     }
 
     private fun getLiveWallpaperFav(id_wallpaper: Int, onResult: (LiveWallpaperItem?) -> Unit) {
@@ -79,42 +84,20 @@ class FavoriteVM : ViewModel() {
         })
     }
 
-    // Tìm nạp tất cả Favorite Wallpaper lưu trong sharedPreferences
-    fun fetchAllFavWallpapers() {
-        val wallpaperIds = getListFavWallpaperIds()
-        val wallpapers = Wallpapers()
+    private fun getWallpaperFav(id_wallpaper: Int, onResult: (WallpaperItem?) -> Unit) {
+        val favWallpaper = RetrofitHelper.getInstance().create(Api::class.java)
 
-        for (id in wallpaperIds) {
-            getWallpaperFav(id) { wallpaperItem ->
-                wallpaperItem?.let {
-                    wallpapers.add(it)
-                }
-                if (wallpapers.size == wallpaperIds.size) {
-                    CommonObject._favoriteWallpapers.postValue(wallpapers)
-                }
+        favWallpaper.getWallpaperById(id_wallpaper).enqueue(object : Callback<WallpaperItem> {
+            override fun onResponse(call: Call<WallpaperItem>, response: Response<WallpaperItem>) {
+                val favWallpaper = response.body()
+                Log.e("AAAAAAAAA", "Wallpaper By ID: $favWallpaper")
+                onResult(favWallpaper)
             }
-        }
-    }
 
-    fun fetchAllFavoriteRingtones() {
-        val ringtoneUrl = sharedPreferencesRingtones.getRingtones()
-        Log.d("AAAAAAAAAA", "getListFavRingtoneUrl: $ringtoneUrl")
-        CommonObject._favoriteRingtones.postValue(ringtoneUrl)
-    }
-
-    fun fetchAllFavLiveWallpapers() {
-        val liveWallpaperIds = getListFavLiveWallpaperIds()
-        val liveWallpapers = ArrayList<LiveWallpaperItem>()
-
-        for (id in liveWallpaperIds) {
-            getLiveWallpaperFav(id) { wallpaperItem ->
-                wallpaperItem?.let {
-                    liveWallpapers.add(it)
-                }
-                if (liveWallpapers.size == liveWallpaperIds.size) {
-                    CommonObject._favoriteLiveWallpapers.postValue(liveWallpapers)
-                }
+            override fun onFailure(call: Call<WallpaperItem>, t: Throwable) {
+                Log.e("AAAAAAAAA", "onFailure: ${t.message}")
+                onResult(null)
             }
-        }
+        })
     }
 }

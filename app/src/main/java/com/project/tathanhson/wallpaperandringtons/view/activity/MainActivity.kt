@@ -9,7 +9,7 @@ import com.project.tathanhson.wallpaperandringtons.CommonObject
 import com.project.tathanhson.wallpaperandringtons.R
 import com.project.tathanhson.wallpaperandringtons.databinding.ActivityMainBinding
 import com.project.tathanhson.wallpaperandringtons.view.activity.base.BaseActivity
-import com.project.tathanhson.wallpaperandringtons.view.fragment.favorite.list.MyFavoriteFragment
+import com.project.tathanhson.wallpaperandringtons.view.fragment.favorite.FavoriteFragment
 import com.project.tathanhson.wallpaperandringtons.view.fragment.livewallpaper.LiveWallpapersFragment
 import com.project.tathanhson.wallpaperandringtons.view.fragment.ringtones.RingtonesFragment
 import com.project.tathanhson.wallpaperandringtons.view.fragment.wallpaper.WallpaperFragment
@@ -27,7 +27,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     private val frgWallpaper = WallpaperFragment()
     private val frgRingtone = RingtonesFragment()
     private val frgLiveWallpapers = LiveWallpapersFragment()
-    private val frgFavorite = MyFavoriteFragment()
+    private val frgFavorite = FavoriteFragment()
 
     override fun initViewModel() {
         wallpaperVM = ViewModelProvider(this)[WallpaperVM::class.java]
@@ -56,6 +56,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             }
         }
 
+
         frgWallpaper.viewModel = wallpaperVM
         supportFragmentManager.beginTransaction().replace(R.id.frameLayout, frgWallpaper).commit()
     }
@@ -79,7 +80,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
         binding.btnFavorite.setOnClickListener {
             frgFavorite.viewModel = favoriteVM
-            showFragmemnt(MyFavoriteFragment())
+            showFragmemnt(FavoriteFragment())
         }
     }
 

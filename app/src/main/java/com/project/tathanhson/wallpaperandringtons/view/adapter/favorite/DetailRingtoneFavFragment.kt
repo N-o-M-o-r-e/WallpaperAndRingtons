@@ -1,4 +1,4 @@
-package com.project.tathanhson.wallpaperandringtons.view.fragment.ringtones
+package com.project.tathanhson.wallpaperandringtons.view.adapter.favorite
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -21,10 +21,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
 import com.project.tathanhson.mediaplayer.model.Data
 import com.project.tathanhson.wallpaperandringtons.CommonObject
 import com.project.tathanhson.wallpaperandringtons.databinding.FragmentDetailRingtonesBinding
+import com.project.tathanhson.wallpaperandringtons.utils.ShareManager
 import com.project.tathanhson.wallpaperandringtons.utils.SoundSettingManager
 import com.project.tathanhson.wallpaperandringtons.view.activity.base.BaseFragment
 import com.project.tathanhson.wallpaperandringtons.viewmodel.RingtonesVM
@@ -41,9 +43,8 @@ import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
 
-class DetailRingtonesFragment :
-    BaseFragment<FragmentDetailRingtonesBinding>(FragmentDetailRingtonesBinding::inflate) {
-        lateinit var viewModel: RingtonesVM
+class DetailRingtoneFavFragment : BaseFragment<FragmentDetailRingtonesBinding>(FragmentDetailRingtonesBinding::inflate) {
+    lateinit var viewModel: RingtonesVM
     private var mediaPlayer: MediaPlayer? = null
     private var listRingtone = ArrayList<Data>()
     private lateinit var url :String
@@ -56,16 +57,14 @@ class DetailRingtonesFragment :
         super.onCreate(savedInstanceState)
         if (context is AppCompatActivity) {
             var requestPermissionLauncher: ActivityResultLauncher<String>
-            requestPermissionLauncher =
-                registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
-                    if (isGranted) {
-                        soundSettingManager.setAlarmSound(url, RingtoneManager.TYPE_RINGTONE)
-                    } else {
-                        Toast.makeText(context, "Permission denied", Toast.LENGTH_SHORT).show()
-                    }
+            requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+                if (isGranted) {
+                    soundSettingManager.setAlarmSound(url, RingtoneManager.TYPE_RINGTONE)
+                } else {
+                    Toast.makeText(context, "Permission denied", Toast.LENGTH_SHORT).show()
                 }
-            soundSettingManager =
-                SoundSettingManager(context as AppCompatActivity, requestPermissionLauncher)
+            }
+            soundSettingManager = SoundSettingManager(context as AppCompatActivity, requestPermissionLauncher)
         } else {
             throw IllegalArgumentException("Context must be an AppCompatActivity")
         }
@@ -76,14 +75,13 @@ class DetailRingtonesFragment :
         super.onAttach(context)
         if (context is AppCompatActivity) {
             var requestPermissionLauncher: ActivityResultLauncher<String>
-            requestPermissionLauncher =
-                registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
-                    if (isGranted) {
-                        soundSettingManager.setAlarmSound(url, RingtoneManager.TYPE_RINGTONE)
-                    } else {
-                        Toast.makeText(context, "Permission denied", Toast.LENGTH_SHORT).show()
-                    }
+            requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+                if (isGranted) {
+                    soundSettingManager.setAlarmSound(url, RingtoneManager.TYPE_RINGTONE)
+                } else {
+                    Toast.makeText(context, "Permission denied", Toast.LENGTH_SHORT).show()
                 }
+            }
             soundSettingManager = SoundSettingManager(context, requestPermissionLauncher)
         } else {
             throw IllegalArgumentException("Context must be an AppCompatActivity")
@@ -97,10 +95,12 @@ class DetailRingtonesFragment :
 
     @SuppressLint("LogConditional")
     override fun initData() {
-        CommonObject.listDataRingtone.observe(viewLifecycleOwner) { listRingtone ->
+        CommonObject.favoriteRingtones.observe(viewLifecycleOwner) { listRingtone ->
             this.listRingtone = listRingtone
         }
-        CommonObject.positionDataRingtone.observe(viewLifecycleOwner) { position ->
+
+        CommonObject.positionRingtoneFav.observe(viewLifecycleOwner) { position ->
+
             position?.let {
                 data = listRingtone[position]
                 binding.tvName.text = data.name
@@ -114,16 +114,6 @@ class DetailRingtonesFragment :
             }
         }
 
-//        CommonObject.itemRingtonesLD.observe(viewLifecycleOwner){ itemRingtones ->
-//            data = itemRingtones
-//            binding.tvName.text = data.name
-//            binding.tvTime.text = data.time
-//            CommonObject.checkFavoriteRingtoneUI(data, sharedPreferencesRingtones,resources,binding.btnFavorite)
-//            binding.seekBar.max = formatTimeToInt(data.time)
-//            url = data.link
-//            playMediaRingtone(url)
-//            viewPlay()
-//        }
     }
 
     override fun initView() {
@@ -137,34 +127,29 @@ class DetailRingtonesFragment :
 
         binding.btnAlarm.setOnClickListener {
             soundSettingManager.setAlarmSound(url, RingtoneManager.TYPE_ALARM)
-            Log.d(TAG, "btnAlarm: url " + url)
+            Log.d(TAG, "btnAlarm: url "+url)
         }
         binding.btnNotification.setOnClickListener {
             soundSettingManager.setAlarmSound(url, RingtoneManager.TYPE_NOTIFICATION)
-            Log.d(TAG, "btnNotification: url " + url)
+            Log.d(TAG, "btnNotification: url "+url)
         }
         binding.btnRingtones.setOnClickListener {
             soundSettingManager.setAlarmSound(url, RingtoneManager.TYPE_RINGTONE)
-            Log.d(TAG, "btnRingtones: url " + url)
+            Log.d(TAG, "btnRingtones: url "+url)
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        soundSettingManager.onActivityResult(
-            requestCode,
-            resultCode,
-            data,
-            url,
-            RingtoneManager.TYPE_RINGTONE
-        )
+        soundSettingManager.onActivityResult(requestCode, resultCode, data, url, RingtoneManager.TYPE_RINGTONE)
     }
+
 
 
     private fun viewRingtone() {
         binding.btnClose.setOnClickListener {
             requireActivity().finish()
-            CommonObject.positionDataRingtone.value = null
+            CommonObject.positionRingtoneFav.value = null
         }
     }
 
@@ -178,11 +163,7 @@ class DetailRingtonesFragment :
             } else {
                 sharedPreferencesRingtones.removeRingtone(data.link)
                 CommonObject.isFavoriteFalse(resources, binding.btnFavorite)
-                Toast.makeText(
-                    requireActivity(),
-                    "Ringtone removed from favorites!",
-                    Toast.LENGTH_SHORT
-                )
+                Toast.makeText(requireActivity(), "Ringtone removed from favorites!", Toast.LENGTH_SHORT)
                     .show()
             }
         }
@@ -203,11 +184,7 @@ class DetailRingtonesFragment :
 
     private fun checkPermissionsAndDownloadAudio() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // Android 13 và cao hơn
-            if (ContextCompat.checkSelfPermission(
-                    requireContext(),
-                    Manifest.permission.READ_MEDIA_AUDIO
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
+            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_MEDIA_AUDIO) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(
                     requireActivity(),
                     arrayOf(Manifest.permission.READ_MEDIA_AUDIO),
@@ -217,11 +194,7 @@ class DetailRingtonesFragment :
                 downloadAudio()
             }
         } else { // Android 12 và thấp hơn
-            if (ContextCompat.checkSelfPermission(
-                    requireContext(),
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
+            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(
                     requireActivity(),
                     arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
@@ -233,11 +206,7 @@ class DetailRingtonesFragment :
         }
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray
-    ) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             REQUEST_READ_MEDIA_AUDIO, REQUEST_WRITE_STORAGE -> {
@@ -260,8 +229,7 @@ class DetailRingtonesFragment :
                 val inputStream: InputStream = urlConnection.inputStream
                 val filename = "ringtone_${System.currentTimeMillis()}.mp3"
 
-                val downloadsDir =
-                    Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                val downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
                 val file = File(downloadsDir, filename)
                 val outputStream = FileOutputStream(file)
 
@@ -285,15 +253,12 @@ class DetailRingtonesFragment :
             } catch (e: Exception) {
                 e.printStackTrace()
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(
-                        requireContext(),
-                        "Download failed: ${e.message}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(requireContext(), "Download failed: ${e.message}", Toast.LENGTH_SHORT).show()
                 }
             }
         }
     }
+
 
 
     private fun mediaRingtone() {
@@ -324,8 +289,8 @@ class DetailRingtonesFragment :
 
 
     fun indexMediaRingtone(index: Int) {
-        if (listRingtone.size - 1 >= index && index >= 0) {
-            CommonObject.positionDataRingtone.value = index
+        if (listRingtone.size-1 >=index && index >=0) {
+            CommonObject.positionRingtoneFav.value = index
         }
     }
 

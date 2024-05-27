@@ -1,6 +1,7 @@
 package com.project.tathanhson.wallpaperandringtons.view.adapter.favorite.list
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -22,7 +23,7 @@ class FavRingtonesAdapter(
 
     override fun onBindViewHolder(holder: RingtoneViewHolder, position: Int) {
         holder.binding.tvRingtone.text = ringtones[position].name
-
+        Log.e("BBBBBBBBBB", "onBindViewHolder: "+ringtones[position].name)
     }
 
     inner class RingtoneViewHolder(val binding: ItemRingtoneFavBinding) :
@@ -35,6 +36,7 @@ class FavRingtonesAdapter(
     }
 
     fun updateRingtones(newRingtones: ArrayList<Data>) {
+
         ringtones = newRingtones
         notifyDataSetChanged()
     }

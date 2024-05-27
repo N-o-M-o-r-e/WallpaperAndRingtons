@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.project.tathanhson.wallpaperandringtons.model.wallpaper.WallpaperItem
-import com.project.tathanhson.wallpaperandringtons.model.wallpaper.Wallpapers
 import com.example.wallpagerandringtons.viewmodel.WallpaperVM
 import com.project.tathanhson.wallpaperandringtons.CommonObject
 import com.project.tathanhson.wallpaperandringtons.databinding.ItemWallpaperBinding
@@ -16,7 +15,7 @@ class ListWallpaperAdapter(
     private val context: Context,
     private val viewModel: WallpaperVM,
     private val lifecycleOwner: LifecycleOwner,
-    private val wallpaperList: Wallpapers
+    private val wallpaperList: ArrayList<WallpaperItem>
 
 ) : RecyclerView.Adapter<ListWallpaperAdapter.ItemHolder>() {
 

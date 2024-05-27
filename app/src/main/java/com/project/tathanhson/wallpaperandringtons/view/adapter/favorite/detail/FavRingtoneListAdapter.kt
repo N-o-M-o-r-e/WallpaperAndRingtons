@@ -1,4 +1,4 @@
-package com.project.tathanhson.wallpaperandringtons.view.adapter.ringtones
+package com.project.tathanhson.wallpaperandringtons.view.adapter.favorite.detail
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -16,13 +16,13 @@ import com.project.tathanhson.wallpaperandringtons.R
 import com.project.tathanhson.wallpaperandringtons.databinding.ItemRingtoneBinding
 import com.project.tathanhson.wallpaperandringtons.viewmodel.RingtonesVM
 
-class ListRingtonesAdapter(
+class FavRingtoneListAdapter(
     private val context: Context,
     private val viewModel: RingtonesVM,
     private val lifecycleOwner: LifecycleOwner,
     private var dataRingtoneList: ArrayList<Data>,
     private var title: String
-) : RecyclerView.Adapter<ListRingtonesAdapter.ItemHolder>() {
+) : RecyclerView.Adapter<FavRingtoneListAdapter.ItemHolder>() {
 
     private var mediaPlayer: MediaPlayer? = null
     private var currentPosition = MutableLiveData<Int>(-1)
@@ -41,14 +41,16 @@ class ListRingtonesAdapter(
 
         init {
             itemView.setOnClickListener {
-                val itemSelected = dataRingtoneList[adapterPosition]
-                CommonObject.positionDataRingtone.value = adapterPosition
+
+                CommonObject.positionRingtoneFav.value = adapterPosition
+
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
-        val binding = ItemRingtoneBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemRingtoneBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ItemHolder(binding)
     }
 
@@ -70,10 +72,10 @@ class ListRingtonesAdapter(
         holder.binding.tvSize.text = itemRingtone.size
         holder.binding.tvTime.text = itemRingtone.time
 
-        currentPosition.observe(lifecycleOwner , Observer { currentPosition->
-            if (currentPosition.equals(position)){
+        currentPosition.observe(lifecycleOwner, Observer { currentPosition ->
+            if (currentPosition.equals(position)) {
                 viewPause(holder)
-            }else{
+            } else {
                 viewPause(holder)
             }
         })
@@ -91,14 +93,14 @@ class ListRingtonesAdapter(
             currentPosition.value = -1
         }
 
-        CommonObject.categoryRingtone.observe(lifecycleOwner , Observer { titleSelect->
-            if (title != ""){
-                if (!titleSelect.equals(title)){
+        CommonObject.categoryRingtone.observe(lifecycleOwner){ titleSelect ->
+            if (title != "") {
+                if (!titleSelect.equals(title)) {
                     stopMediaRingtone()
                     viewPause(holder)
                 }
             }
-        })
+        }
     }
 
 
@@ -132,7 +134,7 @@ class ListRingtonesAdapter(
         holder.binding.btnPause.visibility = View.VISIBLE
     }
 
-    fun viewPause(holder: ItemHolder){
+    fun viewPause(holder: ItemHolder) {
         holder.binding.btnPlay.visibility = View.VISIBLE
         holder.binding.btnPause.visibility = View.GONE
     }
@@ -143,5 +145,3 @@ class ListRingtonesAdapter(
         notifyDataSetChanged()
     }
 }
-
-

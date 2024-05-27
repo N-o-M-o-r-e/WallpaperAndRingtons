@@ -8,6 +8,7 @@
     </data>
 
     <ScrollView
+        android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingHorizontal="12dp"
@@ -18,6 +19,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/warning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="You don't have any favorites yet.\nAdd your favorites now!"
+                android:gravity="center"
+                android:layout_marginTop="60dp"
+                android:textColor="#8D8D8D"
+                style="@style/title_regular_12"
+                android:visibility="gone"
+                />
 
             <include
                 android:id="@+id/iclWallpapers"
@@ -34,6 +47,9 @@
         </LinearLayout>
 
 
+
+
     </ScrollView>
+
 
 </layout>
