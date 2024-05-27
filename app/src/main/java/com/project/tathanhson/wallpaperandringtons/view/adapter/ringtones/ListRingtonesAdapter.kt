@@ -45,6 +45,7 @@ class ListRingtonesAdapter(
                 CommonObject.positionDataRingtone.value = adapterPosition
             }
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemHolder {
@@ -92,7 +93,7 @@ class ListRingtonesAdapter(
         }
 
         CommonObject.categoryRingtone.observe(lifecycleOwner , Observer { titleSelect->
-            if (title != ""){
+            titleSelect?.let {
                 if (!titleSelect.equals(title)){
                     stopMediaRingtone()
                     viewPause(holder)
@@ -138,7 +139,6 @@ class ListRingtonesAdapter(
     }
 
     fun updateRingtones(newRingtones: ArrayList<Data>) {
-
         dataRingtoneList = newRingtones
         notifyDataSetChanged()
     }

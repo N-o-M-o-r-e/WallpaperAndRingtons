@@ -6,8 +6,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.wallpagerandringtons.viewmodel.WallpaperVM
 import com.project.tathanhson.wallpaperandringtons.CommonObject
+import com.project.tathanhson.wallpaperandringtons.MyApplication
 import com.project.tathanhson.wallpaperandringtons.R
 import com.project.tathanhson.wallpaperandringtons.databinding.ActivityMainBinding
+import com.project.tathanhson.wallpaperandringtons.utils.isInternetAvailable
 import com.project.tathanhson.wallpaperandringtons.view.activity.base.BaseActivity
 import com.project.tathanhson.wallpaperandringtons.view.fragment.favorite.FavoriteFragment
 import com.project.tathanhson.wallpaperandringtons.view.fragment.livewallpaper.LiveWallpapersFragment
@@ -62,6 +64,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     }
 
     override fun initView() {
+        if (isInternetAvailable(MyApplication.instance)) {
+            
+        } else {
+
+        }
 
         binding.btnWallpaper.setOnClickListener {
             frgWallpaper.viewModel = wallpaperVM

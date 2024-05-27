@@ -106,14 +106,17 @@
 
     </LinearLayout>
 
-
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:visibility="visible"
         xmlns:android="http://schemas.android.com/apk/res/android"
         tools:ignore="RedundantNamespace" />
+
+
+
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/background_internet">
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_close"
+        android:layout_gravity="end"
+        android:layout_margin="12dp"
+        android:padding="10dp"
+        />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:src="@drawable/no_internet"
+        android:layout_marginHorizontal="40dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You’re offline"
+        android:layout_gravity="center"
+        style="@style/title_bold_16"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="8dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please connect to the internet and try again."
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginBottom="32dp"
+        style="@style/title_regular_12"
+        android:textColor="#9A9A9A"/>
+
+    <LinearLayout
+        android:layout_width="146dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_button"
+        android:gravity="center"
+        android:layout_marginBottom="40dp"
+        android:layout_gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:gravity="center"
+            android:fontFamily="@font/nunito_bold"
+            android:drawableStart="@drawable/ic_reload"
+            android:drawablePadding="8dp"
+            android:text="Retry"/>
+    </LinearLayout>
+
+
+</LinearLayout>

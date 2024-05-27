@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.project.tathanhson.mediaplayer.model.Data
 import com.project.tathanhson.wallpaperandringtons.CommonObject
@@ -72,13 +71,15 @@ class FavRingtoneListAdapter(
         holder.binding.tvSize.text = itemRingtone.size
         holder.binding.tvTime.text = itemRingtone.time
 
-        currentPosition.observe(lifecycleOwner, Observer { currentPosition ->
-            if (currentPosition.equals(position)) {
-                viewPause(holder)
-            } else {
-                viewPause(holder)
+        currentPosition.observe(lifecycleOwner) { currentPosition ->
+            currentPosition?.let {
+                if (currentPosition.equals(position)) {
+                    viewPause(holder)
+                } else {
+                    viewPause(holder)
+                }
             }
-        })
+        }
 
         holder.binding.btnPlay.setOnClickListener {
             currentPosition.value = position
@@ -140,7 +141,6 @@ class FavRingtoneListAdapter(
     }
 
     fun updateRingtones(newRingtones: ArrayList<Data>) {
-
         dataRingtoneList = newRingtones
         notifyDataSetChanged()
     }
