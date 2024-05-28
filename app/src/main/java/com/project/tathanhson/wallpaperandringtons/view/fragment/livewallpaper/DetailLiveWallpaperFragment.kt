@@ -44,9 +44,7 @@ class DetailLiveWallpaperFragment :
 
     private lateinit var url : String
 
-
-
-
+    
 
     override fun initViewModel() {
         viewModel = ViewModelProvider(this)[LiveWallpaperVM::class.java]
