@@ -39,51 +39,6 @@ class ShareManager(private val context: Context, private val url: String) {
         }
     }
 
-    fun shareRingtone() {
-        CoroutineScope(Dispatchers.IO).launch {
-            val audioUri = loadAudioFromURL(url)
-            withContext(Dispatchers.Main) {
-                if (audioUri != null) {
-                    val shareIntent = Intent().apply {
-                        action = Intent.ACTION_SEND
-                        putExtra(Intent.EXTRA_STREAM, audioUri)
-                        type = "audio/*"
-                    }
-                    context.startActivity(Intent.createChooser(shareIntent, "Share ringtone via"))
-                } else {
-                    Toast.makeText(context, "Failed to load audio", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
-
-    private suspend fun loadAudioFromURL(urlString: String): Uri? {
-        return withContext(Dispatchers.IO) {
-            val url: URL = stringToURL(urlString) ?: return@withContext null
-            val connection: HttpURLConnection
-            return@withContext try {
-                connection = url.openConnection() as HttpURLConnection
-                connection.connect()
-                val inputStream: InputStream = connection.inputStream
-                val cachePath = File(context.cacheDir, "audio")
-                cachePath.mkdirs() // Create directory if it doesn't exist
-                val file = File(cachePath, "shared_audio.mp3")
-                val fos = FileOutputStream(file)
-                val buffer = ByteArray(1024)
-                var len: Int
-                while (inputStream.read(buffer).also { len = it } > 0) {
-                    fos.write(buffer, 0, len)
-                }
-                fos.flush()
-                fos.close()
-                FileProvider.getUriForFile(context, "${context.packageName}.fileprovider", file)
-            } catch (e: IOException) {
-                e.printStackTrace()
-                null
-            }
-        }
-    }
-
     private suspend fun loadBitmapFromURL(urlString: String): Bitmap? {
         return withContext(Dispatchers.IO) {
             val url: URL = stringToURL(urlString) ?: return@withContext null
